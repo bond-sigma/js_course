@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        /*Арифметика*/
+        
+        //Пример арифметической операции
+        var i = 2;
+        i = (2 + i) * 3 / i;
+        console.log(i);
+        
+        //Пример арифметического оператора % возращающего остаток от деления
+        console.log(5 % 3);
+        
+        //Сложение двух чисел
+        console.log(5 + 7);
+                
+        //Сложение строк с помощью бинарного плюса
+        console.log("первая строка " + " вторая строка");
+        
+        //Сложение строки и числа 
+        console.log("первая строка " + 12);
+        console.log(12 + "первая строка" );
+        
+        //Пример работы унарного плюса
+        var numberString = "02";
+        console.log("Тип данных до преобразования: " + typeof numberString);
+        
+        numberString = +numberString;
+        
+        //Преобразовали строку в число
+        console.log("Тип данных после: " + typeof numberString, numberString, 444, "33333");
+        
+        /*Присваивания*/
+        
+        var c = 10;
+        var b = 20;
+        var d = c + b;
+
+        console.log('После присваивания d равно: ' + d);
+        
+        var g = a = b = d = c = 2 + 2;
+
+        console.log('После присваивания по цепочке: ' + d);
+
+        var t = 20;
+
+        var m = (2 * (t = 10 * 3));
+        
+        console.log('t равно: ' + t);
+        console.log('m равно: ' + m);
+        
+        /*Инкремент/дикремент*/
+        
+        var incr = 10;
+        var dncr = 10;
+        
+        //Инкрементируем значение переменной на 1
+        console.log("After increment:" + ++incr);
+
+        //Дикрементируем значение переменной на 1
+        console.log("After decriment:" + --dncr);
+        
+        
+        /*Присваивания*/
+        
+        var num = 225;
+        num = num + 50;
+        num += 50;
+        
+        num -= 100;
+        
+        num *= 2;
+        
+        num /=2;
+        
+        
+        var cc = "sss";
+        
+        cc += "dddd";
+        
+        
+        var cc = (cc = 20, dd = 22, tt = 30);
+
+
+    </script>
+</body>
+</html>
