@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        var day = "Вторник";
+        var  x;
+        
+        switch (day) {
+            case "Понедельник":
+                x = "Сегодня Понедельник";
+                break;
+            case "Вторник":
+                x = "Сегодня Вторник";
+                break;
+            case "Среда":
+                x = "Сегодня Среда";
+                break;
+            case "Четверг":
+                x = "Сегодня Четверг";
+                break;
+            case "Пятница":
+                x = "Сегодня Пятница";
+                break;
+            case "Суббота":
+                x = "Сегодня Суббота";
+                break;
+            case "Воскресенье":
+                x = "Сегодня Воскресенье";
+                break;
+        }
+        
+        console.log(x);
+        
+        /*Пример switch c вариантом по умолчанию*/
+        
+        switch (day) {
+            case "Суббота":
+                x = "Сегодня Суббота";
+                break;
+            
+            case "Воскресенье":
+                x = "Сегодня Воскресенье";
+                break;
+            
+            default:
+                x = "Сегодня будний день";
+                break;
+        }
+
+        console.log(x);
+        
+        
+        /*Switch c перечислением значений*/
+        switch (day) {
+            case "Понедельник":
+            case "Вторник":
+            case "Среда":
+            case "Четверг":
+            case "Пятница":
+                x = "Сегодня будний день";
+                break;
+            case "Суббота":
+                x = "Сегодня Суббота";
+                break;
+            case "Воскресенье":
+                x = "Сегодня Воскресенье";
+                break;
+        }
+
+        console.log(x);
+        
+        
+        /*Switch с пропущенным break*/
+        
+        var var11 = 10;
+        
+        switch (var11) {
+            case 11:
+                console.log('Наше число 11');
+                
+                break;
+            
+            case 10:
+                console.log('Наше число 10');
+                
+            default :
+                console.log('Наше число по умолчанию');
+                break;      
+        }
+        
+        /*Пример с неграми*/
+        var race = 'negr';
+        
+        switch (race) {
+            case "negr":
+                //поселить в африке
+            case "arab":
+                //поселить в Азии
+                //дать им ислам
+                break;
+            
+            case 'europe':
+                //что то сделать    
+        }
+        
+
+    </script>
+</body>
+</html>

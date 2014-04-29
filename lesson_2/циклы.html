@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        /*Цикд WHILE*/
+        
+        var var1 = 10;
+        
+        while (var1 > 0) {
+            console.log('1.Мы по прежнему работаем и сейчас значение равно:' + var1);
+            var1--;
+        }
+        
+        
+        /*do...while*/
+        var var2 = 10;
+        
+        do {
+            console.log('2.Мы по прежнему работаем и сейчас значение равно:' + var2);
+            var2++;
+        } while (var2 < 20);
+        
+        /*Выполнится хотя бы раз даже хотя условие не выполняется*/
+
+        var var3 = 10;
+
+        do {
+            console.log('3.Мы по прежнему работаем и сейчас значение равно:' + var3);
+            var3++;
+        } while (var3 < 10);
+        
+        
+        /*пример бесконечного цикла*/
+        while(true) {
+            console.log('Бесконечный цикл');
+        };
+        
+        /*for цикл*/
+
+        var var5;
+
+        for ( var5 = 0; var5 < 3; var5++ ) {
+            console.log( 'Итерация:', var5);
+        }
+        
+        
+        /*Вложенный цикл*/
+        var var7 = 10;
+        while (var7 < 12) {
+            var var8 = 11;
+            
+            for (;var8 < 12; var8++) {
+                console.log('Внутренний цикл на итерации внешнего цикла');
+            }
+            var7++;
+        }
+        
+        
+        /*break и continue*/
+        
+        /*Цикл прервется на итерации где переменная будет равна 15*/
+        var var11 = 10;
+        while ( var11 < 30 ) {
+            console.log( 'Переменная равна: ', var11 );
+            if ( var11 == 15 ) {
+                break;
+            }
+            var11++;
+        }
+
+        /*пример конструкции continue*/
+        for ( var var12 = 0; var12 < 10; var12++ ) {
+            if (var12 == 5 || var12 == 8) {
+                continue;
+            }
+            
+            console.log('Number:', var12);
+        }
+        
+    </script>
+</body>
+</html>

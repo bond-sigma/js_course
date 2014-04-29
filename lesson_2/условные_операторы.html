@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        //Это условие выполнится
+        if ( true ) {
+            console.log( 'Оператор условия в действии' );
+        }
+
+        //Это условие не выполнится. Оператор отрицания
+        if ( !true ) {
+            console.log( ";-(" )
+        }
+
+        //Это условие выполнится
+        if ( 10 == 10 ) {
+            console.log( "10 == 10" );
+        }
+
+        if ( "Some_string" ) {
+            console.log();
+        }
+
+        var var1 = 200;
+        var var2 = 300;
+        var var3 = "String";
+        
+        //Пример условия которое выполнится
+        if (var1 != var2) {
+            console.log('Hello!');
+        }
+        
+        //Пример условия которое не выполнится и выполнения кода попадет в блок else
+        if (var1 == var2) {
+            console.log('');
+        } else {
+            console.log('Мы попали в блок else');
+        }
+        
+        //Пример else if
+        if ( 1 == 0) {
+            
+            console.log('1==0');
+            
+        } else if (1 == 1) {
+            
+            console.log('1 == 1');
+            
+        }
+        
+        var myName = 'Дмитрий';
+
+        if ( myName == 'Алексей' ) {
+            
+            console.log( 'Меня зовут Алексей' );
+            
+        } else if ( myName == 'Александр' ) {
+            
+            console.log( 'Меня зовут Александр' );
+            
+        } else {
+            
+            console.log( 'Значит все таки Дмитрий' );
+            
+        }
+        
+        //Тернарный оператоп
+        var var4 = 10;
+        var var5;
+        
+        if (var4 == 11) {
+            var5 = 15;
+        } else {
+            var5 = 30;
+        }
+        
+        var var6 = (var4 == 11) ? 15 : 30;
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+            
+        var variable1 = 10;
+        var variable2 = 20;
+        var variable3 = "A это первая строка";
+        var variable4 = "Вторая";
+        var variable6 = null;
+        var variable7;
+        var variable8 = 0;
+        var variable9 = 10;
+        var variable10  = true;
+
+        console.log( "Оператор больше:", variable1 > variable2 );
+
+        console.log( "Оператор меньше:", variable1 < variable2 );
+
+        console.log( "Оператор меньше или равно:", variable1 <= variable2 );
+
+        console.log( "Оператор равенства:", variable1 == variable9 );
+        
+        //Пример
+        console.log(!false);
+        
+        var variable11 = variable1 == variable9;
+
+        //Сравниваем два логиеских значения
+        console.log( "Оператор сравнения с логиеским значением:", variable11 == variable10 );
+
+        /*Побуквенное сравенние двух строк*/
+        console.log( "A это первая строка" > "Вторая" );
+
+        console.log( 'Машина' > "Машка" );
+
+        //Нестрогое сравнение с приведением к числу
+        console.log( '2' >= 1 );
+
+        //Нестрогое сравнение с приведением к числу
+        console.log( '03' == 3 );
+
+        //Строгое сравнение без приведение к числу
+        console.log( '03' === 3 );
+
+        //Строгое сравнение без приведение
+        console.log( 'Без преобразования:', 0 === false );
+
+        //Нестрогое сравнение с приведием
+        console.log( 'C преобразованием:', 0 == false );
+
+        //Строгое сравнение без приведение
+        console.log( 1 !== true );
+
+        //Нестрогое сравнение с приведием
+        console.log( 1 != true );
+
+        console.log('Приведение undefined к числу:', +undefined);
+
+        console.log('Приведение null к числу:', +null);
+        
+        //Хотя null  и приводится к числу он равен только undefined
+        console.log( null == 0);
+        
+        //Отлиие работы оператора больше или равно и оператора равенства
+        console.log( null >= 0);
+       
+        console.log('Сравнение равенства null и undefined: ', undefined == null);
+        
+    </script>
+</body>
+</html>
