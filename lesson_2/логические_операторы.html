@@ -19,7 +19,7 @@
         /*Оператор ИЛИ*/
         
         //Одно из знаений как минимум равно true
-        console.log( true || true );
+        console.log( true || true || true );
 
         //Одно из знаений как минимум равно true
         console.log( true || false );
@@ -28,7 +28,7 @@
         
         console.log('Цепь условий', var1 == var2 || var1 == 3 || var2 == 2 );
 
-        console.log(var1 == var2 || var1 == 2 || var3);
+        console.log(var1 == var2 || var1 == 1 || var3);
         
         var var5 = var4 || 10;
         
@@ -47,9 +47,8 @@
         //Будет false потому что одно из выражений равно false
         console.log( 10 == 30 && 40 == 40 );
 
-        console.log( 10 == 30 && 40 == 40 );
 
-        if ( hours == '12' || minutes == '00' ) {
+        if ( hours == '12' && minutes == '00' ) {
             console.log( 'Сейчас полдень' );
         } else {
             console.log( 'Сегодня любое другое время дня' );

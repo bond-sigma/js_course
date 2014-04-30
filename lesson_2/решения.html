@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        var variable1 = 11;
+        
+        if (variable1 > 10 && variable1 < 100) {
+            console.log('Мы в нашем диапазоне');
+        }
+        
+        var variable2 = 20;
+        var variable3 = 30;
+        
+        if (variable2 > variable3) {
+            console.log('variable2 больше');
+        } else if (variable2 < variable3) {
+            console.log('variable3 больше');
+        } else {
+            console.log('Они равны');
+        }
+        
+        var greatest = (variable1 > variable2) ? 'var1' : ((variable2 > variable1) ? 'var2' : 'равны');
+        console.log(greatest);
+        
+        var monthNumber = 12;
+
+        if ( monthNumber > 0 && monthNumber < 13 ) {
+            if ( monthNumber < 3 || monthNumber == 12 ) {
+                console.log( 'Зима' );
+            } else if ( monthNumber > 2 && monthNumber < 6 ) {
+                console.log( "Весна" )
+            } else if ( monthNumber > 5 && monthNumber < 9 ) {
+                console.log( 'Лето' )
+            } else {
+                console.log( 'Осень' )
+            }
+        } else {
+            console.log( 'Месяц не может быть отрицательным' )
+        }
+        
+        var num1 = 6;
+        
+        if (num1 % 2 === 0 && num1 % 3 === 0) {
+            console.log('Наше исло подходит под условие')
+        }
+
+    </script>
+</body>
+</html>
