@@ -3,9 +3,9 @@
 
 1. Во время изучения курса, паралельно советую читать курс на сайте - http://learn.javascript.ru/ 
 2. Из книг советую к прочтению в том же порядке что указываю:
-а) http://rutracker.org/forum/viewtopic.php?t=4182947 Дэвид Флэнаган JavaScript. Подробное руководство  
-б) Nicholas C. Zakas - High Performance JavaScript 
-в) Stoyan Stefanov JavaScript Patterns - Есть и на русском языке
+⋅⋅* http://rutracker.org/forum/viewtopic.php?t=4182947 Дэвид Флэнаган JavaScript. Подробное руководство  
+⋅⋅* Nicholas C. Zakas - High Performance JavaScript 
+⋅⋅* Stoyan Stefanov JavaScript Patterns - Есть и на русском языке
 
 Ресурсы которые можно и желательно читать.
 1. Подписаться на рассылку http://javascriptweekly.com/ Каждую пятницу будет приходить рассылка о самых последних новостях в мире Javascript. Интересные статьи и т.д.
