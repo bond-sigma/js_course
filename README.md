@@ -13,4 +13,4 @@
 3. Список бесплатных книг по JS http://jsbooks.revolunet.com/
 4. Блог одного из гуру по JS http://www.nczonline.net/
 5. http://www.smashingmagazine.com/tag/javascript/ Бывают отлиные статьи
-6. Тоже неплохой блог http://dailyjs.com/
+6. Тоже неплохой блог http://dailyjs.com/ 
