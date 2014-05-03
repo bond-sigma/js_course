@@ -7,7 +7,7 @@
   * Nicholas C. Zakas - High Performance JavaScript 
   * Stoyan Stefanov JavaScript Patterns - Есть и на русском языке
 
-#Ресурсы которые можно и желательно читать.
+#Ресурсы .
 
 1. Подписаться на рассылку http://javascriptweekly.com/ Каждую пятницу будет приходить рассылка о самых последних новостях в мире Javascript. Интересные статьи и т.д.
 2. Справочник по языку от создателей браузера Firefox https://developer.mozilla.org/ru/docs/JavaScript
