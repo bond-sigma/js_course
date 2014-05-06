@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        var globalVariable = "I'm global variable";
+        var testVariable   = 11;
+        
+        
+        
+        function testFunction(param1, param2)
+        {
+            var testVariable = 20;
+            
+            function testFuntion2()
+            {
+                console.log(testVariable);
+            }
+            
+            console.log(globalVariable);
+            
+            testFuntion2(); 
+        }
+
+        testFunction(1, 2);
+
+    </script>
+</body>
+</html>
