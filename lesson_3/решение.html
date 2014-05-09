@@ -12,7 +12,7 @@
         for (var i = 0; i < array1.length; i ++) {
             console.log(typeof array1[i]);
             if (typeof array1[i] == "number" ) {
-                if (array1[i] > maValue) {
+                if (maValue == null || array1[i] > maValue) {
                     console.log(array1[i]);
                     maValue = array1[i];
                 }
