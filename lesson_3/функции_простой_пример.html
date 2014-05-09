@@ -7,17 +7,22 @@
     <script type="text/javascript">
         
         var globalVariable = "I'm global variable";
-        var testVariable   = 11;
         
+        console.log(testVariable);
+        console.log(ttt);
+
+        testFunction(1, 2);
         
         
         function testFunction(param1, param2)
         {
             var testVariable = 20;
+            var ttt = 0;
             
-            function testFuntion2()
+            function testFuntion2(testVariable)
             {
-                console.log(testVariable);
+                var globalVariable = 30;
+                console.log(window['globalVariable']);
             }
             
             console.log(globalVariable);
@@ -25,7 +30,9 @@
             testFuntion2(); 
         }
 
-        testFunction(1, 2);
+        var testVariable   = 11;
+
+        
 
     </script>
 </body>

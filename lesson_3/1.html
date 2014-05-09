@@ -55,6 +55,7 @@
         func4("первый", "второй");
 
         
+        
         /*Пример изменение внешней переменной двумя функциями*/
         var outerVariable2 = 40;
 
@@ -105,8 +106,11 @@
 
         /*Пример функции которая возращает результат сложения ее двух параметров */
         function calculate ( firstNum, secondNum ) {
-            var sum = firstNum + secondNum;
-            return sum;
+            return  true; 
+        }
+        
+        if ( calculate() != 0 ) {
+            
         }
 
         var outSum = calculate( 10, 20 );
@@ -139,33 +143,30 @@
         var result1 = terminated();
         console.log( "Результат остановленной функци с помощью return: " + result1 + '\n' );
         
-        
+        var a1 = 10;
         
         /*Передача одной функции как параметр в другую функцию*/
-        function paramFunc () {
+        function childFunc () {
             console.log( 'Вызвана функция параметр.\n' );
+            console.log(a1)
         }
 
         function parentFunction ( param1 ) {
             console.log( 'Вызвана функция родитель.' );
-            param1();
+            var a2 = 20;
+            return [a1, a2]
         }
         
         
-        parentFunction(paramFunc);
-        
-        
+        parentFunction(childFunc);
+
         /*Второй способ передачи функции как параметра в другую функцию*/
-        parentFunction( function paramFunc2() {
+        parentFunction( function ddddd() {
             console.log( 'Вызвана функция параметр переданная сразу\n' );
         });
-        
-        
-        
 
         /*Рекурсия (вызов функции внутри себя) */
         function recursiveFunction ( param1 ) {
-            console.log( 'Вызов рекурсивной функции с параметром: ' + param1 + '' );
             if ( param1 < 4 ) {
                 recursiveFunction( param1 + 1 )
             }

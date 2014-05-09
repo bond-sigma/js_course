@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        var array1 = [-1,5,7, "ssss"];
+        var maValue = null;
+        
+        for (var i = 0; i < array1.length; i ++) {
+            console.log(typeof array1[i]);
+            if (typeof array1[i] == "number" ) {
+                if (array1[i] > maValue) {
+                    console.log(array1[i]);
+                    maValue = array1[i];
+                }
+            }
+        }
+        
+        function calculator(num1, num2, operation) {
+            if ( num1 % 1 != 0 || num2 % 1 != 0 ) {
+                console.log( 'Оба числа должны быть дробными' );
+                return 0;
+            }
+            if ( num1 < 0 || num2 < 0 ) {
+                console.log( 'Оба числа должны быть больше нуля' );
+                return 0;
+            }
+            var result;
+            switch (operation) {
+                case "add":
+                    result = num1 + num2;
+                    break;
+                case "minus":
+                    result = num1 - num2;
+                    break;
+                case "multi":
+                    result = num1 * num2;
+                    break;
+                case "divide":
+                    result = num1 / num2;
+                    break;
+                default :
+                    console.log( 'Передано недопустимое имя операции' );
+                    return 0;
+                    break;
+            }
+            return result; 
+        }
+
+        console.log( calculator( 10, 20, 'add' ) );
+        console.log( calculator( 10, 20, 'multi' ) );
+        console.log( calculator( 10, -10, 'add' ) );
+        console.log( calculator( 10, 20.5, 'add' ) );
+        console.log( calculator( 10, 20, 'blabla' ) );
+        
+        
+    </script>
+</body>
+</html>
