@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script  type="text/javascript">
+        
+        var globalVar = 20;
+        
+        function func1() {
+            var var1 = 10;
+            
+            return function () {
+                console.log(var1);
+            }
+        }
+        
+        var resultFromFunc = func1();
+        
+        
+        resultFromFunc();
+
+    </script>
+</body>
+</html>

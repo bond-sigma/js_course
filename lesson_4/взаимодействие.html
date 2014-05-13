@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        /*Простое сообщение*/
+        alert('Я простое сообщение');
+        
+        
+        /*Получение данных от пользователя*/
+        var message = prompt('Введите ваше имя: ', 'Буратино');
+        console.log('Ваше имя: ' + message);
+        
+        
+        /*Подтверждение от пользователя*/
+        var confirmed = confirm('Вы хотите удалить этот файл?');
+        
+        if (confirmed) {
+            document.write('Удаляем файл');
+        } else {
+            document.write('Оставляем файл');
+        }
+
+        if (confirm('Вы хотите удалить этот файл?')) {
+            document.write('Удаляем файл');
+        } else {
+            document.write('Оставляем файл');
+        }
+
+    </script>
+</body>
+</html>
