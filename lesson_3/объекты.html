@@ -27,6 +27,10 @@
         literalObject.funcVariable();
         literalObject['funcVariable']();
         
+        if (literalObject.hasOwnProperty('testObj')) {
+            
+            /*проверка на наличие войства в объекте*/
+        }
         
         /*Поиск несуществующего свойства*/
         console.log('Попытка поиска несуществующего свойства: ' + literalObject['notDefinedField']);
@@ -34,6 +38,7 @@
         
         /*Добавление свойств во время исполнения кода*/
         literalObject.variable2 = "динамически_созданное_свойство";
+        literalObject['variable2'] = "динамически_созданное_свойство";
         console.log(literalObject);
         
         
@@ -52,7 +57,7 @@
                 }
             },
             wakeUp      : function () {
-                if (this.isSleeping == false) {
+                if (this.isSleeping == true) {
                     this.isSleeping = false;
                     console.log('Проснулся'); 
                 }
@@ -90,10 +95,31 @@
         
         /*Пример передачи по ссылке значения переменных типа Объект. После изменения значения свойства в одном объекте  - оно изменяется и в другом.*/
         var var1 = { field1 : 10 };
-        var var2 = var1;
+        var var2 = {};
         
-        var2.field1 = 20;
-        console.log(var1);
+        //var2.field1 = 20;
+        //console.log(var1);
+
+        /*КОпирование объектов*/
+        for (var field in Animal) {
+            var2[field] =  Animal[field];
+            //console.log("Поле: " + field + " Значение: " + Animal[field]);
+        }
+        
+        function objRefExample(param1) {
+            param1.field1 = 20;
+        }
+        
+        objRefExample(var1);
+        
+        console.log(var1)
+        
+        
+        
+        
+        
+        
+        ///function 
   
     </script>
 </body>

@@ -11,12 +11,20 @@
         function func1() {
             var var1 = 10;
             
-            return function () {
+            var fff = function () {
                 console.log(var1);
-            }
+
+            };
+            var ggg  = function () {
+               //var cc = var1 + 110;
+                //return cc;
+
+            };
+            
+            return [fff, ggg]
         }
-        
-        var resultFromFunc = func1();
+
+        var resultFromFunc = null;
         
         
         resultFromFunc();

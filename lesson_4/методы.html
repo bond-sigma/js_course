@@ -15,7 +15,7 @@
         
         /*Методы строк*/
         console.log('Замена под строк: ' + simpleString.replace('M', '$'));
-        console.log('Поиск подстроки: ' + simpleString.indexOf("S"));
+        console.log('Поиск подстроки: ' + objectString.indexOf("S"));
         console.log('Длина строки: ' + simpleString.length);
         console.log('Приведение строки к нижнему регистру: ' + simpleString.toLowerCase());
         console.log('Получение буквы в строке: ' + simpleString.charAt(5));
@@ -23,13 +23,13 @@
         /*Числа*/
         
         var simpleNumber = 10;
-        var floatNumber  = 12.9;
+        var floatNumber  = 12.988888;
         var objectNumber = new Number(10);
         
         
         /*Методы чисел*/
-        console.log('Приведение числа: ' + floatNumber.toFixed(1));
-        console.log('Приведение числа: ' + objectNumber.toFixed(1));
+        console.log('Приведение числа: ' + floatNumber.toFixed());
+        console.log('Приведение числа: ' + objectNumber.toFixed());
         console.log('Способ получения числа из строки: ' + parseInt("102", 10));
         
         
@@ -43,7 +43,7 @@
         console.log("Массива после добавления: ", simpleArray);
         var value = simpleArray.pop();
         console.log("Массива после pop: ", simpleArray);
-        console.log('Срез массива: ' + simpleArray.slice(0, 3));
+        console.log('Срез массива: ' , simpleArray.slice(0, 3));
 
 
     </script>
