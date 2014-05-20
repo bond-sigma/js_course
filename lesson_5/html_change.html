@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+    <input type="text" id="input-text">
+</div>
+<script type="text/javascript">
+
+    var idElement = document.getElementsByClassName( 'test-class-2' )[0];
+    var children  = idElement.children[0];
+    if ( idElement ) {
+        getInnerHtml( children );
+        getOuterHtml(children);
+        
+        //changeOuterHtml(children, '<a href="/">sssss</a>')
+        //getOuterHtml(children);
+        //changeHtml(children, 'New text2');
+    }
+
+    function getInnerHtml ( element ) {
+        console.log( element.innerHTML );
+    }
+
+    function changeHtml ( element, htmlString ) {
+        element.innerHTML = htmlString;
+    }
+
+    function getOuterHtml ( element ) {
+        console.log( element.outerHTML );
+    }
+
+    function changeOuterHtml ( element, htmlString ) {
+        element.outerHTML = htmlString;
+    }
+    
+    
+    
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        /*Что в себе содержит самый главный объект*/
+        console.log(window);
+        
+        /*Пример глобальной переменной и доступ к ней через объект window*/
+        var var1 = 10;
+        console.log(window.var1);
+        
+        
+        /*Объект текущего адреса*/
+        console.log(location);
+        
+        /*Текущая ссылка и ее части*/
+        console.log(location.href);
+        console.log('Текущий хост: ' + location.host);
+        console.log('Текущий путь: ' +  window.location.pathname);
+        console.log('Текущий протокол: ' +  window.location.protocol);
+        
+        
+        /*Функция для тестирования перезагрузки окна*/
+        function testWindowReload()
+        {
+            /*Перезагрузка страницы*/
+            if (confirm("Хотите перезагрузить страницу")) {
+                window.location.reload();
+            }
+
+        }
+        
+        
+        /*Информация о экране пользователя*/
+        
+        /*Объект экрана*/
+        console.log(window.screen);
+
+        /*Текущая ссылка и ее части*/
+        console.log('Текущий размер экрана: Высота: ' + window.screen.height + " Ширина: " + window.screen.width);
+        
+       
+        /*Сведения о браузере*/
+        console.log(navigator);
+        console.log('Текущая информация о браузере: ' + navigator.userAgent);
+        console.log('ТВаша платформа: ' +  window.navigator.platform);
+        
+        
+        /*Открытие и работа с новым окном*/
+        var openedWindow = window.open("http://google.com", "", "width=400, height=400, location=no, menubar=no");
+        /*Закрытие программно открытого окна*/
+        //openedWindow.close();
+        
+        
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+    <input type="text" id="input-text">
+</div>
+<script type="text/javascript">
+
+    /*Пример работы с узлами и измением их содерджимого и значений аттрибутов*/
+    var idElement = document.getElementById('content-id');
+
+    
+    /*Сервисная функциия для вывода атрибутов*/
+    function getAttributes ( element ) {
+        
+        console.log(element.attributes);
+
+        if ( element.hasAttributes() ) {
+            for ( var i = 0; i < element.attributes.length; i++ ) {
+                if ( typeof element.attributes[i] != 'function' ) {
+                    console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );
+                }
+            }
+        }
+    }
+    
+    getAttributes(idElement.children[0]);
+
+    /*Изменение аттрибута*/
+    idElement.children[0].setAttribute( 'class', 'test-class-3' );
+    
+    /*Удаление аттрибута*/
+    idElement.children[0].removeAttribute( 'accesskey' );
+    
+    /*Добавление аттрибута*/
+    var ourNewAttribute = document.createAttribute( "custom" );
+    ourNewAttribute.nodeValue = "custom-value-attributes";
+    idElement.children.item(0).attributes.setNamedItem(ourNewAttribute);
+    
+    
+    getAttributes(idElement.children[0]);
+    
+
+</script>
+</body>
+</html>

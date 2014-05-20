@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value" id="p-holder">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+        </div>
+    </div>
+    <input type="text" id="input-text">
+</div>
+<script type="text/javascript">
+    
+    /*
+        document.getElementById() — позволяет получить элемент по его ID.
+        document.getElementsByName() — позволяет получить элементы по их имени.
+        document.getElementsByTagName() — позволяет получить элементы по имени тега.
+     */
+    
+    /*Получение елемента по атриббуту id*/
+    var idsElement = document.getElementById('content-id');
+    console.log(idsElement);
+    
+    /*document.getElementsByClassName() — позволяет получить элементы по их классу*/
+    var classElements = document.getElementsByClassName('test-class');
+    console.log(classElements);
+    
+    /*document.getElementsByTagName() — позволяет получить элементы по имени тега.*/
+    var tagElements = document.getElementsByTagName('p');
+    console.log(tagElements, '\n');
+    
+    
+    /*Поиск дочерних едементов*/
+    console.log("Есть ли дочерние елементы: " + idsElement.hasChildNodes());
+    console.log("Список дочерних елементов: " , idsElement.childNodes, '\n');
+    
+    /*Доступ к дочерним елементам по индексу или с помощью метода*/
+    console.log("Доступ к дочернему елементу по индексу: " , idsElement.childNodes[0]);
+    console.log("Доступ к дочернему елементу с помощью метода: " , idsElement.childNodes.item(1), '\n');
+    
+
+    console.log('Доступ к первому дочернему елементу: ', idsElement.firstChild);
+    console.log('Доступ к последнему дочернему елементу: ', idsElement.lastChild);
+    
+    console.log("Доступ к родительскому элементу: " , idsElement.parentNode , '\n');
+    
+    
+    /**
+     * ELEMENT_NODE(1) — узел представляющий собой элемент (тег).
+     * ATTRIBUTE_NODE(2) — узел представляющий собой атрибут элемента.
+     * TEXT_NODE(3) — узел представляющий собой текст (текст параграфа, текст ссылки и т.д.).
+     * COMMENT_NODE(8) — узел представляет собой комментарий в HTML коде.
+     * DOCUMENT_NODE(9) — узел представляет собой документ, является корнем остальных узлов.
+    **/
+    
+    var dictionaryTypes = {
+        "1" : "ELEMENT_NODE",
+        "2" : "ATTRIBUTE_NODE",
+        "3" : 'TEXT_NODE',
+        "4" : "COMMENT_NODE"
+    };
+    
+    
+    for (var i =0; i < idsElement.childNodes.length; i++) {
+        
+        console.log(i + ". Дочерний элемент:" , idsElement.childNodes[i]);
+        console.log("Имя узла:" + idsElement.childNodes[i].nodeName);
+        console.log("Имя тега:" + idsElement.childNodes[i].tagName);
+        console.log("Тип узла: " + dictionaryTypes[idsElement.childNodes[i].nodeType]);
+        console.log("Содержимое узла: " + idsElement.childNodes[i].data);
+        console.log("Содержимое nodeValue: " + idsElement.childNodes[i].nodeValue);
+        console.log("Содержимое innerHTML: " + idsElement.childNodes[i].innerHTML);
+        //console.log("Аттрибуты узла: " , idsElement.childNodes[i].attributes);
+        
+        //Некоторые узлы не содержат аттрибутов
+        if (idsElement.childNodes[i].attributes) {
+            console.log('Аттрибуты узла: ', idsElement.childNodes[i].attributes, "\n");
+        } else {
+            console.log('Узел не содержит аттрибутов.\n')
+        }
+    }
+    
+    /*Получение список дочерних елементов исключая текстовые узлы*/
+    console.log("Дочерние елементы без текстовых узлов: ", idsElement.children);
+    
+    
+    /*Получение следующего узла дерева по уровню*/
+    console.log("Следующий елемент по уровню: ", idsElement.nextSibling.nextSibling);    
+    console.log("Предыдущий елемент по уровню: ", idsElement.previousSibling.previousSibling);
+
+
+    /*Получение значение инпута*/
+    console.log(document.getElementById('input-text').value)
+    
+
+</script>
+</body>
+</html>

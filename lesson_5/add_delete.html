@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value" id="div-element">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+    <input type="button" value="Insert pure html" onclick="insertPureHtml();" >
+    <input type="button" value="Append P tag" onclick="appendPTag();">
+    <input type="button" value="Insert in A tag" onclick="insertInPlace();">
+    <input type="button" value="Insert Simple text" onclick="insertTextNode();">
+    <input type="button" value="Remove element" onclick="removeNode();">
+    <input type="button" value="Clone element" onclick="cloneNodes();">
+    
+</div>
+<script type="text/javascript">
+
+    function insertPureHtml () {
+        document.getElementById( 'div-element' ).innerHTML += '<a href="/">Pure html link</a>'
+    }
+
+    function appendPTag () {
+        var parentElement = document.getElementById( 'div-element' );
+        var childElement = document.createElement( 'p' );
+        childElement.id = 'new-p';
+        childElement.className = 'new-p-classname';
+        childElement.style.color = 'green';
+        childElement.innerHTML = " I'm new p tag";
+        parentElement.appendChild( childElement );
+    }
+
+    function insertInPlace () {
+        var parentElement = document.getElementById( 'div-element' );
+        var childElement = document.createElement( 'a' );
+        childElement.id = 'new-p2';
+        childElement.className = 'new-p-classname2';
+        childElement.style.color = 'red';
+        childElement.innerHTML = " I'm new p tag";
+        parentElement.insertBefore( childElement, parentElement.children[0] );
+    }
+
+    function insertTextNode () {
+        var parentElement = document.getElementById( 'div-element' );
+        var childElement = document.createTextNode( 'I m text node' );
+        parentElement.appendChild( childElement );
+    }
+
+    function removeNode () {
+        var parentElement = document.getElementById( 'div-element' );
+        var childElement = parentElement.getElementsByTagName( 'p' )[0];
+        parentElement.removeChild(childElement);
+    }
+    
+    function cloneNodes()
+    {
+        var parentElement = document.getElementById( 'div-element' );
+        var clonned = parentElement.getElementsByTagName( 'p' )[0].cloneNode(true);
+        clonned.innerHTML = 'I clonned';
+        parentElement.appendChild( clonned );
+    }
+    
+</script>
+</body>
+</html>
