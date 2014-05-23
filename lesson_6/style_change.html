@@ -1,0 +1,160 @@
+<html>
+<head>
+    <title></title>
+<style type="text/css">
+    .firstClass {
+        margin: 20px 30px 10px 10px;
+        color: green;
+    }
+    
+    .secondClass {
+        background-color: red;
+        position: static;
+    }
+    
+</style>
+</head>
+    
+
+<body>
+<div id='test-id'>
+    <div  class="firstClass secondClass" style="font-size: 40px;" >
+        <span attr="attrvalue" >
+            <p>Paragraph</p>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+        </span>
+        <p>Paragraph 2</p>
+        <a> Link6</a>
+        <h2>H2 tag</h2>
+    </div>
+
+    <div id="diw-with-id" style="color:blue" class="secondClass">
+        <a href="#">Link4</a>
+        <table>
+        </table>
+        <a href="/"></a>
+        <span></span>
+        <div accesskey="some-key" class="some-test-class"></div>
+
+        <a> Link5</a>
+
+        <div></div>
+
+    </div>
+
+    <a href="#">Link3</a>
+
+    <article>
+        Article tag
+        <a href="#"></a>
+    </article>
+    
+    
+    <input type="button" value="Получение стилей" onclick="getStyles();" >
+    <input type="button" value="Toggle класс" onclick="toggleCssClass();">
+    <input type="button" value="Изменения стилей" onclick="changeStyles();">
+    <input type="button" value="Изменения стилей строкой" onclick="rawStyleAssign();">
+    <input type="button" value="Анимация" onclick="animation();">
+    
+    <div id="animation-block">
+        <img src="http://spoilering.ru/wp-content/uploads/2014/01/Iron-Man-731658-300x200.jpg">
+    </div>
+
+
+</div>
+<script type="text/javascript">
+
+    var firstClassElement = document.getElementsByClassName('firstClass' )[0];
+
+
+    function getStyles () {
+        
+        console.log('Получение стилей элемента: ', firstClassElement.style);
+
+        /**
+         * Доступ к свойствам которые содержат тире в своем имени заменяется на camelCase нотацию
+         */
+        console.log('Доступ к свойству объявленному через аттрибут style:' + firstClassElement.style.fontSize);
+        console.log('Доступ к свойству объявленному через CSS class:' + firstClassElement.style.color);
+        
+        
+        /*Получение стилей которые объявлены через CSS*/
+        var computedStyles = window.getComputedStyle(firstClassElement, '');
+        console.log('Доступ к свойству CSS class:' + computedStyles.color);
+
+
+
+        console.log('Получение class элемента: ' + firstClassElement.className);
+        /**
+         * Не самый лучший метод изменения класса, поскольку заменяет все классы присвоенные элементу.
+         */
+        firstClassElement.className = 'test-class';
+        
+        console.log('Получение class элемента: ' + firstClassElement.className);
+        
+        
+
+        /**
+         * Получение списка классов элемента и работа с ними
+         */
+        console.log('Список классов: ', firstClassElement.classList);
+        console.log('Проверка наличия класса: ', firstClassElement.classList.contains('secondClass'));
+        
+        //Добавления нового класса
+        firstClassElement.classList.add('thirdClass');
+        
+        //Удаление класса
+        firstClassElement.classList.remove('firstClass');
+
+    }
+    
+    function toggleCssClass()
+    {
+        /**
+         * Добавления класса если его нет и удаление если он присутсвует в элементе
+         */
+        firstClassElement.classList.toggle('firstClass');
+    }
+    
+    
+    function changeStyles()
+    {
+        /**
+         * Изменение стилей через объект style
+         * @type {string}
+         */
+        firstClassElement.style.border = '1px solid black';
+        firstClassElement.style.backgroundColor = 'blue'; 
+    }
+    
+    function rawStyleAssign()
+    {
+        firstClassElement.style = 'background-color: black';
+        firstClassElement.style.cssText   = 'background-color: black';
+    }
+    
+    
+    function animation()
+    {
+        var animatedElement = document.getElementById('animation-block');
+        animatedElement.style.position = 'absolute';
+        var interv = setInterval(function () {
+            var currentLeft = animatedElement.style.left;
+            if ( currentLeft == '' ) {
+                animatedElement.style.left = '0px';
+            } else {
+                var newLeft = (parseInt( animatedElement.style.left, 10 ) + 1);
+                animatedElement.style.left = newLeft + 'px';
+            }
+
+            if ( newLeft >= 400 ) {
+                clearInterval( interv );
+            }
+
+        }, 20);
+    }
+
+</script>
+</body>
+</html>

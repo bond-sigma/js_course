@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+
+    
+    <p>One P</p>
+    <p>Second P</p>
+    <p>Third P</p>
+    
+    <div id="goods-list">
+        <a href="#" price="200">Товар 1</a>
+        <a href="#" price="100">Товар 2</a>
+        <a href="#" price="400">Товар 3</a>
+        <a href="#" price="500">Товар 3</a>
+    </div>
+
+    <input type="text" id="input-text">
+    
+    <!--Вложенные дивы для отображения механизмов всплытия и захвата-->
+    <div id="main-div" style="padding-left: 20px;background-color: antiquewhite; width: 400px;">
+        Я главный ДИВ
+        <div style="background-color: red;margin-left: 30px;" id="child-div">
+            Дочерний див
+            <div style="background-color: yellow;margin-left: 40px;" id="child-div2">
+                Еще Дочерний див
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+<br><br><br>
+
+<input type="button" value="ClickHandler" onclick="simpleEventHendler();" >
+<input type="button" id="button1" value="ClickHandlerViaDom" >
+<input type="button" id="button2" value="FewHandlers"  >
+<input type="button" id="button3" value="Remove Handlers" >
+<input type="button" id="button4" value="EventObject" >
+
+<br>
+
+<a id="test-link" href="http://google.com">Тестовая ссылка</a>
+
+<a id="test-link2" href="http://google.com">Тестовая ссылка2</a>
+<!--Bubbling and capturing-->
+<script type="text/javascript">
+
+    /**
+     * Демонстрация механизма всплытия и захвата
+     */
+    document.getElementById( 'main-div' ).addEventListener( 'click', function ( event ) {
+        console.log( 'Я обработчик main-div ' );
+        //console.log( 'Но все произошло здесь', event.target );
+    }, false );
+
+    document.getElementById( 'child-div' ).addEventListener( 'click', function ( event ) {
+        console.log( 'Я обработчик child-div ' );
+        console.log(' Текущий момент обработки событий:', event.eventPhase)
+    }, false );
+
+    document.getElementById( 'child-div2' ).addEventListener( 'click', function ( event ) {
+        console.log( 'Я обработчик child-div2 ' );
+        //Остановка всплытия чтобы пректатить поиск и выполнение обработчиков родительских элементов
+        //event.stopPropagation();    
+    }, false );
+
+    /**
+     * Отмена действий по умолчанию.
+     * При addEventListener - event.preventDefault()
+     * При onclick - return false;
+     */
+
+    document.getElementById( 'test-link' ).addEventListener( 'click', function ( event ) {
+        console.log( 'Я обработчик test-link ' );
+        //event.preventDefault();
+    }, false );
+    
+    
+    document.getElementById( 'test-link2' ).onclick = function ( event ) {
+        console.log( 'Я обработчик test-link2 ' );
+        return false;
+    };
+
+</script>
+
+<!--Main event code-->
+<script type="text/javascript">
+
+    /**
+     * Обработка события клика поставленного через аттрибут onclick
+     */
+    function simpleEventHendler () {
+        
+        console.log( 'Произошло событие клика мыши на кнопку через аттрибут' );
+
+    }
+
+    /**
+     *  Вешаем обработчик события клика на мышку через свойство объекта связанного с элементом
+     */
+    var button1 = document.getElementById( 'button1' );
+    button1.onclick = function () {
+        console.log( 'Произошло событие клика мыши на кнопку через свойство' );
+        /**
+         *  Внутри обработчика события this ссылается на объект елемента у которого произошло событие
+         */
+        console.log( 'Аттрибут нашей кнопки: ' + this.getAttribute( 'id' ) );
+
+    };
+
+    button1.onclick = function () {
+        console.log('Я второй обработчик события этой кнопки');
+    };
+
+    function listenEvent ( evnt, elem, func ) {
+        // Стандартная функция
+        if ( elem.addEventListener ) {
+            elem.addEventListener( evnt, func, false );
+        } else if ( elem.attachEvent ) { // IE функция
+            elem.attachEvent( "on" + evnt, func );
+        }
+    }
+    
+    function thirdHandler()
+    {
+        console.log('Я третий обработчик события');
+    }
+
+    /**
+     * Добавление нескольких обработчиков на один и тот же елемент
+     */
+
+    var button2 = document.getElementById( 'button2' );
+
+    /**
+     * Добавление обработчика события в очередь обработчиков. Добавление согласно стандарту. Добавляем анонимную функцию
+     */
+    button2.addEventListener('click', function () {
+        console.log('Я первый обработчик события');
+    }, false);
+
+    button2.addEventListener('click', function secondHandler () {
+        console.log('Я второй обработчик события');
+    }, false);
+    
+    
+    button2.addEventListener('click',thirdHandler , false);
+
+    /**
+     * Удаление событий
+     */
+    var button3 = document.getElementById( 'button3' );
+    button3.addEventListener('click', function button3Handler () {
+
+        /**
+         * Данное удаление НЕ СРАБОТАЕТ. Удалять можно только по имени функции
+         */
+        button2.removeEventListener('click', function () {
+            console.log('Я первый обработчик события');
+        }, false);
+
+        /**
+         * Данное удаление НЕ СРАБОТАЕТ. Имя этой функции нигде не доступно
+         */
+        //button2.removeEventListener('click', secondHandler, false);
+
+        /**
+         * Корректное удаление через имя функции которую мы присваивали как обработчик
+         */
+        button2.removeEventListener('click', thirdHandler, false);
+        
+        
+    }, false );
+
+    /**
+     * Работа с объектом события
+     */
+    var button4 = document.getElementById( 'button4' );
+    button4.addEventListener('click', function (event) {
+        
+        console.log('Я обработчик события: ', event);
+        console.log('Имя события: ', event.type);
+        console.log('То на чем произошло событие: ', event.target);
+        console.log('this ссылается на этот елемент', this)
+        
+    }, false);
+</script>
+
+<!--Delegating-->
+<script type="text/javascript">
+    /**
+     * Деллегирование - мы вешаем обработчик не на каждый елемент а на контейнер в котором они находятся. Економится память.
+     */
+    document.getElementById('goods-list' ).addEventListener('click', function (event) {
+        if (event.target.tagName && event.target.tagName == 'A') {
+            console.log('Вы кликнули по товару с именем: ' + event.target.innerHTML + " и ценой: " + event.target.getAttribute('price'));
+        }
+    }, false)
+    
+</script>
+
+</body>
+</html>

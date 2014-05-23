@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+    
+    <p>One P</p>
+    <p>Second P</p>
+    <p>Third P</p>
+    
+    <input type="text" id="input-text">
+</div>
+
+<input type="button" value="insertAdjacentHTML" onclick="insertAdjacentHTMLExample();" >
+<input type="button" value="insertAdjacentElement" onclick="insertAdjacentElementExample();" >
+<input type="button" value="insertAdjacentText" onclick="insertAdjacentTextExample();" >
+<input type="button" value="DocumentFragment" onclick="DocumentFragmentExample();">
+<script type="text/javascript">
+
+    /**
+     * Вставка в опрделенное место HTML простой строкой
+     */
+    function insertAdjacentHTMLExample() {
+        var testDiv = document.getElementById('test-id');
+        //Получаем ссылку на второй тег Р чтобы использовать его как точку для вставки
+        var pObj    = testDiv.getElementsByTagName('p')[1];
+        pObj.insertAdjacentHTML('beforeBegin', '<a>New link inserted by insertAdjacentHTML</a>');
+    }
+
+    /**
+     * Вставка в опрделенное место елемента созданного с помощью createElement
+     */ 
+    function insertAdjacentElementExample () {
+        var testDiv = document.getElementById('test-id');
+        //Получаем ссылку на первый тег Р чтобы использовать его как точку для вставки
+        var pObj    = testDiv.getElementsByTagName('p')[0];
+        var newLink = document.createElement('a');
+        newLink.style.color = 'green';
+        newLink.setAttribute('href', 'http://google.com');
+        //Задаем внутренний текст нового елемента
+        newLink.innerHTML = 'I new link with insertAdjasmentElement';
+        pObj.insertAdjacentElement('beforeEnd', newLink);
+        
+    }
+
+    /**
+     * Вставка простого текстового узла в определенное место. Теги игнорируются
+     */
+    function insertAdjacentTextExample () {
+        var testDiv = document.getElementById('test-id');
+        //Получаем ссылку на первый тег Р чтобы использовать его как точку для вставки
+        var pObj    = testDiv.getElementsByTagName('p')[0];
+        pObj.insertAdjacentText('afterEnd', "<a href='#'>I new text</a>");
+    }
+
+    function DocumentFragmentExample () {
+        //Получаем ссылку на элемент в который будем потом вставлять наш фрагмент
+        var testDiv = document.getElementById('test-id');
+        
+        //Создаем объект фрагмента
+        var fragment = document.createDocumentFragment();
+        var newElHolder = null;
+        
+        // В цикле создаем елементы и добавляем их в наш фрагмент
+        for (var i = 0; i < 10; i++) {
+            newElHolder = document.createElement('div');
+            newElHolder.innerHTML = "I'm new div with index: " + i;
+            fragment.appendChild(newElHolder);
+        }
+        
+        //Вставляем наш фрагмент внутрь елемента
+        testDiv.appendChild(fragment);
+
+    }
+
+    
+</script>
+
+
+
+</body>
+</html>
