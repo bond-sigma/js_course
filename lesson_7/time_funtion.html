@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+<!--Пример загрузки кода из внешнего файла-->    
+<script src="test_script_file.js" type="text/javascript"></script>
+<script src="test_script_file2.js" type="text/javascript"></script>
+    
+    
+</head>
+<body>
+
+<div id="timer" style="font-size: 25px;">
+    
+</div>
+
+<div id="progress-holder" style="width: 400px; border: 1px solid black;height: 100px;">
+   <div id="moving-bar" style="background-color: red; width: 10%; height: 100px">
+       
+   </div> 
+</div>
+<!--Bubbling and capturing-->
+<script type="text/javascript">
+
+    /**
+     * Эта функция будет вставлять в див текущее время
+     */
+    function timer () {
+        var timer       = document.getElementById('timer');
+        var currentDate = new Date();
+        timer.innerHTML = 'Текущее время: ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+        
+        if (currentDate.getSeconds() > 58 && intervalPointer) {
+            //Остановка setInterval через сохраненную ссылку на него.
+            //clearInterval(intervalPointer);
+        }
+    }
+
+    /**
+     * setInterval принимает 2 параметра. Первый функция, второй временной интрвал. 
+     * После этого он начинает выполнять этот код каждый интревал времени до тех пор 
+     * пока не будет оставлен директивой clearInterval. 
+     * После старта setInterval возращает ссылку на себя, которую потом используют для остановки.
+     * @type {number}
+     */
+    var intervalPointer = setInterval(timer, 1000);
+    
+    
+    
+    function demonstrateSetTimeout()
+    {
+        console.log('Я отложенная функция!');
+        
+    }
+
+    /**
+     * setTimeout выполняет отложенный код только единожды через переданный интервал. Функция также возращает ссылку на себя для отмены действия через 
+     * @type {number}
+     */
+    var timeOut = setTimeout(demonstrateSetTimeout, 1000);
+
+    //Отмена невыполненного setTimeout через сохраненную ссылку на него.
+    clearTimeout(timeOut);
+
+    /**
+     * Пример использование setInterval для имитации полосы загрузки файла
+     */
+    function progressBar()
+    {
+        var moving = document.getElementById('moving-bar');
+        
+        var intervalPointer = setInterval(function () {
+            var currentWidth = parseInt(moving.style.width);
+            if (currentWidth >= 100) {
+                clearInterval(intervalPointer);
+            } else {
+                moving.style.width = (currentWidth + 0.5 ) + '%';
+            }
+        }, 50);
+    }
+    
+</script>
+
+</body>
+</html>

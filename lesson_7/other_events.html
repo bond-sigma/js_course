@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+<!--Пример загрузки кода из внешнего файла-->    
+<script src="test_script_file.js" type="text/javascript"></script>
+<script src="test_script_file2.js" type="text/javascript"></script>
+    
+    
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value">
+            <p>Text1</p>
+            <p><b>BoldText2</b> and <a href="#">Link</a></p>
+            <p>Another P tag</p>
+        </div>
+    </div>
+
+    
+    <p>One P</p>
+    <p>Second P</p>
+    <p>Third P</p>
+    
+    <div id="goods-list">
+        <a href="#" price="200">Товар 1</a>
+        <a href="#" price="100">Товар 2</a>
+        <a href="#" price="400">Товар 3</a>
+        <a href="#" price="500">Товар 3</a>
+    </div>
+
+    <input type="text" id="input-text">
+    
+    <!--Вложенные дивы для отображения механизмов всплытия и захвата-->
+    <div id="main-div" style="padding-left: 20px;background-color: antiquewhite; width: 400px;">
+        Я главный ДИВ
+        <div style="background-color: red;margin-left: 30px;" id="child-div">
+            Дочерний див
+            <div style="background-color: yellow;margin-left: 40px;" id="child-div2">
+                Еще Дочерний див
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+<br><br><br>
+
+<br>
+
+<a id="test-link" href="http://google.com">Тестовая ссылка</a>
+
+<a id="test-link2" href="http://google.com">Тестовая ссылка2</a>
+<!--Bubbling and capturing-->
+<script type="text/javascript">
+
+    /**
+     * onload - событие которое срабатывает когда загружено все ДОМ дерево и загружены картинки и остальные ресурсы
+     */
+    window.onload = function () {
+        console.log('Все загружено');
+    };
+
+    /**
+     * Пример использование onload для картинки. Мы отображаем ее только тогда когда она полностью загрузилась в браузер.
+     */
+    function insertNewImgToPage()
+    {
+        var newImg = document.createElement('img');
+        newImg.src = 'http://www.b2bweb.fr/wp-content/uploads/js-logo-badge-512.png';
+        newImg.onload = function () {
+            console.log('Картинка загрузилась. Вставляем ее в ДОМ');
+            document.body.appendChild(newImg);
+        };
+    }
+    
+    /**
+     * DOMContentLoaded - событие которое срабатывает когда загружено все ДОМ дерево но еще не загружены картинки и остальные ресурсы
+     */
+    document.addEventListener( "DOMContentLoaded", function () {
+        console.log('DOM дерево загружено');
+    }, false );
+
+
+    /**
+     * onload - событие которое срабатывает когда пользователь закрывает вкладку
+     */
+   /* window.onbeforeunload = function () {
+        return 'Вы уверены что хотите закрыть это окно!';
+    };*/
+
+    /**
+     * onerror - событие которое срабатывает когда возникла ошибка и она не была перехвачена нигде
+     */
+    window.onerror = function (message, source, lineno) {
+        console.log('Неперехваченная ошибка!', message, source, lineno);
+    };
+    
+    //console.log(window.someValue.someValue)
+
+    /**
+     * Функция без блока try catch  Исполнение прервется на первой же ошибке
+     */
+    function demonstarteWithout()
+    {
+        console.log('Run1');
+        console.log('Run2');
+        console.log(window.someValue.someValue);
+        console.log('Run3');
+    }
+
+    /**
+     * Функция с блоком try catch.  При возникновении ошибки в блоке try исполнение продолжится после блока catch
+     */
+    function demonstrateTryCatch()
+    {
+        console.log('Run1');
+        try {
+            console.log('Run2');
+            console.log(window.someValue.someValue);
+        } catch (e) {
+            console.log(e);
+        }
+        console.log('Run3');
+    }
+
+</script>
+
+</body>
+</html>

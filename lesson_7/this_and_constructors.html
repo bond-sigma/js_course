@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /**
+         * Глобальная переменная
+         * @type {string}
+         */
+        var name = 'Глобальное имя';
+
+        /**
+         * Простая функция в которой this ссылается на глобальный контекст
+         */
+        function testFuntion () {
+            console.log( this.name );
+        }
+
+        /**
+         * Создали самый простой объект
+         */
+        var testObject = {
+            name : 'Имя как свойство объекта'
+        };
+
+        /**
+         * Создали новое свойство и присвоили ему нашу функцию
+         */
+        testObject.showName = testFuntion;
+
+        /**
+         * Вызываем это новое свойство и видим что теперь this  в этой функции ссылается на testObject
+         */
+        testObject.showName();
+
+        /**
+         * Пример обьявления класса
+         * @constructor
+         */
+        function SimpleClass()
+        {
+            this.name       = 'Имя класса';
+            this.showName   = function () {
+                console.log(this.name);
+            };
+        }
+
+        /**
+         * Создание нового екземпляра класса. В таком случае после new мы получаем новый объект в котором this ссылается на него
+         * @type {SimpleClass}
+         */
+        var newInstance = new SimpleClass();
+        newInstance.showName();
+
+        /**
+         * В каждой функции есть неявная переменная arguments которая содерджит в себе все параметры переданные в функцию
+         */
+        function testFuntion2()
+        {
+            console.log('Аргументы функции', arguments);
+            console.log('Первый аргумент функции', arguments[0]);
+            
+            //var args = [].slice.call(arguments);
+            
+        }
+        
+        testFuntion2(1, "2", {a: 1});
+
+
+        /**
+         * Изменение контекста функции через apply и  call
+         */
+        newInstance.showName.apply(testObject);
+        newInstance.showName.call(testObject);
+
+        /**
+         * Функция с двумя параметрами
+         */
+        function someFunctionWithArguments(firstParam, secondParam)
+        {
+            console.log('Мое имя:' , this.name);
+            console.log('Я функция с параметрами', firstParam, secondParam)
+        }
+
+        /**
+         * Вызов это функции для выполнения в контексте объекта testObject. При call аргументы для вызова передаются через запятую
+         */
+        someFunctionWithArguments.call(testObject, 'Первый параметр', 'Второй параметр');
+
+        /**
+         * Вызов это функции для выполнения в контексте объекта testObject. При apply аргументы для вызова передаются в ввиде массива
+         */
+        someFunctionWithArguments.apply(testObject, ['Первый параметр', 'Второй параметр']);
+        
+        
+        
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>
