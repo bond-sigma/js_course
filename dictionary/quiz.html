@@ -5,6 +5,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
     <script type="application/javascript" src="js/bootstrap.js"></script>
+    <script type="application/javascript" src="quiz.js"></script>
 
     <style type="text/css">
         body {
@@ -38,8 +39,23 @@
     </div>
 </div>
 
-<div class="container-fluid">
-
+<div class="container">
+    <button id="start-button" class="btn btn-primary" value="Start">Начать тест</button>
+    <div id="quiz-container" style="display: none; max-width: 500px;margin: 0 auto;">
+        <!--Место для вопроса-->
+        <h2 id="question-title"></h2>
+        <div id="answers-container"></div>
+        <div class="row">
+            <input class="pull-left btn" id="finish-btn" type="button" value="Закончить">
+            <input class="pull-left btn" id="back-btn" type="button" value="Назад">
+            <input class="pull-right btn btn-primary" id="next-btn" type="button" value="Далее">
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    window.onload = function () {
+        Quiz.init();
+    };
+</script>
 </body>
 </html>
