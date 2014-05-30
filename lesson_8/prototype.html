@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="application/javascript">
+
+        var objectA  = {
+            methodA: function () {
+                console.log('I method from A');
+            }
+        };
+
+        var objectB  = {
+            methodB: function () {
+                console.log('I method from B')
+            }
+        };
+
+        objectB.prototype = objectA.prototype;
+
+
+        function inherit(C, P) {
+            var F = function () {};
+            F.prototype = P.prototype;
+            C.prototype = new F();
+            C.uber = P.prototype;
+            C.prototype.constructor = C;
+
+        }
+
+
+    </script>
+</body>
+</html>
