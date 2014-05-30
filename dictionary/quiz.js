@@ -11,7 +11,8 @@ var Quiz = {
                "Ivan", 'Dima', "Sergei"
             ],
             chosen  : [0, 2],
-            multi   : true
+            multi   : true,
+            canBeSkipped: false
 
         },
         {
@@ -20,7 +21,9 @@ var Quiz = {
                "Home", 'Work', "Train station"
             ],
             chosen  : [],
-            multi   : false
+            multi   : false,
+            canBeSkipped: false
+
 
         }
     ],
@@ -34,25 +37,37 @@ var Quiz = {
             self.startQuiz();
         }, false);
 
+        document.getElementById('next-btn').addEventListener('click', function () {
+            self.goTo(1);
+        }, false);
+
+        document.getElementById('back-btn').addEventListener('click', function () {
+            self.goTo(-1);
+        }, false);
+
         this.mainContainer      = document.getElementById('quiz-container');
         this.answersContainer   = document.getElementById('answers-container');
         this.titleContainer     = document.getElementById('question-title');
-
 
     },
     startQuiz: function () {
         this.startButton.style.display = 'none';
         this.showQuestion();
-
-        var $ul = this.createAnswersList();
-        this.answersContainer.appendChild($ul);
+        this.renderQuestion();
 
         this.mainContainer.style.display = 'block';
 
         //console.log('Quiz started');
     },
+    renderQuestion: function () {
+        var $ul = this.createAnswersList();
+        this.answersContainer.appendChild($ul);
+    },
     showQuestion: function () {
         this.titleContainer.innerHTML = this.questions[this.currentIndex].question;
+    },
+    removeQuestion: function () {
+        this.answersContainer.innerHTML = '';
     },
     createAnswersList: function () {
         var $ul = document.createElement('UL'),
@@ -69,6 +84,9 @@ var Quiz = {
             $control        = document.createElement('input');
             $control.type   = controlName;
 
+            if (!question.multi && controlName == 'radio') {
+                $control.name = 'answer';
+            }
 
             if ( question.chosen.indexOf(i) != -1 ) {
                 $control.checked = "checked";
@@ -79,12 +97,44 @@ var Quiz = {
 
             $label.appendChild($control);
             $label.appendChild($text);
-
             $li.appendChild($label);
-
             $ul.appendChild($li);
         }
 
         return $ul;
+    },
+
+    goTo: function ( direction ) {
+        var question    = this.questions[this.currentIndex],
+            chosen      = [];
+
+        var $inputs = this.answersContainer.getElementsByTagName('input');
+
+        for (var i = 0; i < $inputs.length; i++) {
+            if ($inputs[i].checked) {
+                chosen.push(i);
+            }
+        }
+
+        if (chosen.length == 0 && !question.canBeSkipped) {
+            alert('Question can\'t be skipped!');
+            return false;
+        }
+
+        question.chosen = chosen;
+
+        if (direction == -1 && this.currentIndex == 0 ) {
+            return false;
+        } else if (direction == 1 && this.currentIndex == this.questions.length - 1) {
+            return false;
+        }
+
+        this.currentIndex += direction;
+
+        this.removeQuestion();
+
+        this.renderQuestion();
+
+        return true;
     }
 };
