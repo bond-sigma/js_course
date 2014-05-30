@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Node.js v0.10.11 Core Modules, Node.js v0.10.21 Core Modules, Node.js v0.8.11 Core Modules, google, googlevisual, jQuery-1.9.1}" />
-    <includedPredefinedLibrary name="Node.js Globals" />
     <includedPredefinedLibrary name="WebGL" />
   </component>
 </project>

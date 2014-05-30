@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Справочник по уроку</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script type="application/javascript" src="js/bootstrap.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        .hero-unit {
+            padding: 23px;
+            font-size: 15px;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">JS course short dictionary</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Уроки</li>
+                    <li><a href="#lesson_1">Типы данных</a></li>
+                    <li><a href="#lesson_2">Операторы. Условия. Switch</a></li>
+                    <li><a href="#lesson_3">Lesson 3</a></li>
+                    <li><a href="#lesson_4">Lesson 4</a></li>
+                    <li><a href="#lesson_5">BOM, DOM</a></li>
+                    <li><a href="#lesson_6">Lesson 6</a></li>
+                    <li><a href="#lesson_7">Lesson 7</a></li>
+                    <li><a href="#lesson_8">Lesson 8</a></li>
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group" id="lesson_1">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                            <h4>Типы данных</h4>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4>Типы данных:</h4>
+
+                            <ul>
+                                <li>
+                                    Числа
+                                    <pre>var number_variable  = 10;</pre>
+                                    Передаются по значению при копировании переменных
+                                </li>
+                                <li>
+                                    Строки
+                                    <pre>var string_variable  = "я строка";</pre>
+                                    Передаются по значению при копировании переменных
+
+                                </li>
+                                <li>
+                                    Булевые или логические
+                                    <pre>var boolean_variable = true;</pre>
+                                    Могут иметь только два значения true или false.
+                                </li>
+
+                                <li>
+                                    null
+                                    <pre>var null_variable = null;</pre>
+                                    Обозначает что переменная пуста.
+                                </li>
+
+                                <li>
+                                    Объекты
+                                    <pre>var object_variable  = {};</pre>
+                                    При копировании в переменные передается ссылка на объект. Объект при этом в памяти
+                                    не копируется.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 1-->
+
+
+                <!--Lesson 2-->
+                <div class="accordion-group" id="lesson_2">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                            <h4>Операторы. Приведение типов. Условия. Switch</h4>
+                        </a>
+                    </div>
+                    <div id="collapseTwo" class="accordion-body collapse">
+                        <div class="hero-unit" >
+                <ul>
+                    <li>
+                        Операторы
+                        <pre>
+|| - Логическое ИЛИ. Срабатывает и возращает true если левая или правая часть true
+== - Оператора НЕстрогого равенства. При сравнении конвертирует переменные разных типов в число.
+=== - Оператора СТРОГОГО равенства. При сравнении не ковертирует.
+&& - Оператор И . Срабатывает и возращает true если левая И правая часть true выражения true
+! - Оператор отрицания. Приводит переменную к булевому значению и меняет на обратную.
+>, < - Операторы сравнения БОЛЬШЕ, МЕНЬШЕ. Строки сравниваются не по длине, а по кодам букв в таблице.
+>=, <= - Операторы сравнения БОЛЬШЕ ИЛИ РАВНО, МЕНЬШЕ ИЛИ РАВНО.
+                        </pre>
+                    </li>
+
+                    <li>
+                        Приведение типов.
+                        <pre>
+Приведение к числу осуществляется приставкой знака + перед переменной. - +"string"
+Приведение к булевому значению осуществляется приставкой !! к переменной - !!"some_string"
+                        </pre>
+                    </li>
+                    <li>
+                        Условные переменные. Используются для написания логики программ и их ветвления.
+                        <pre>
+if ( true ) {
+  console.log( 'Оператор условия в действии' );
+}
+
+if ( "Some_string" ) {
+   console.log('Some_string');
+}
+                        </pre>
+                        В условных операторах любая непустая строка, число не 0 является true.
+                    </li>
+
+                    <li>
+                        <b>Switch</b> - используется как замена  if else .
+                        <pre>
+        switch (day) {
+            case "Суббота":
+                x = "Сегодня Суббота";
+                break;
+
+            case "Воскресенье":
+                x = "Сегодня Воскресенье";
+                break;
+
+            default:
+                x = "Сегодня будний день";
+                break;
+        }
+                        </pre>
+
+                    </li>
+
+                </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson-->
+
+                
+                <!--Start lesson 3-->
+                <div class="accordion-group" id="lesson_3">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                            <h4>Lesson 3</h4>
+                        </a>
+                    </div>
+                    <div id="collapseThree" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 3-->
+                
+                <!--Start lesson 4-->
+                <div class="accordion-group" id="lesson_4">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                            <h4>Lesson 4</h4>
+                        </a>
+                    </div>
+                    <div id="collapseFour" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 4-->
+                
+                <!--Start lesson 5-->
+                <div class="accordion-group" id="lesson_5">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFifth">
+                            <h4>BOM, DOM</h4>
+                        </a>
+                    </div>
+                    <div id="collapseFifth" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4>BOM</h4>
+                            Это набор глобальных переменных дляполучения информации о браузере и текущем УРЛ
+                            <ul>
+                                <li>
+                                   <b>window</b> - является главным объектом браузера.
+                                    Содежит в себе все глобавльные переменные.
+                                    Является мостом между JS и DOM
+                                   <pre>console.log(window);</pre>
+                                </li>
+                                <li>
+                                   <b>window.screen или screen</b> - Содержит в себе информацию о экране пользователя.
+                                   <pre>console.log('Текущий размер экрана: Высота: ' + window.screen.height + " Ширина: " + window.screen.width);</pre>
+                                </li>
+                                <li>
+                                   <b>navigator</b> - Содержит в себе информацию о браузере пользователя.
+                                   <pre>
+console.log('Текущая информация о браузере: ' + navigator.userAgent);
+console.log('ТВаша платформа: ' +  window.navigator.platform);
+                                   </pre>
+                                </li>
+                                <li>
+                                   <b>location</b> - Содержит в себе всю информацию о текущем УРЛ страницы.
+                                    Имеет методы для перехода на другую страницу или перезагрузки текущей.
+                                   <pre>
+console.log(location.href);
+console.log('Текущий хост: ' + location.host);
+console.log('Текущий путь: ' +  window.location.pathname);
+console.log('Текущий протокол: ' +  window.location.protocol);
+window.location.reload(); - метод для перезагрузки текущей страницы.
+                                   </pre>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hero-unit">
+                            <h4>DOM</h4>
+                            Объектная модель браузера отвечающая за управление HTML. Каждый HTML тег имеет представление в ввиде объекта.
+                            <ul>
+                                <li>
+                                   <b>getElementById</b> - Получение ссылки на объект тега через его аттрибут <b>id</b>
+                                   <pre>var idsElement = document.getElementById('content-id');</pre>
+                                </li>
+                                <li>
+                                   <b>getElementsByClassName</b> - Поиск елементов по их аттрибуту class
+                                   <pre>var classElements = document.getElementsByClassName('test-class');</pre>
+                                   Возращает объект HtmlCollection. По поведению схожий с массивом, но также имеет метод <b>index</b> для доступа к елементам по индексу в коллекции
+                                </li>
+
+                                <li>
+                                   <b>getElementsByTagName</b> - Поиск елементов по их аттрибуту class
+                                   <pre>    var tagElements = document.getElementsByTagName('p');</pre>
+                                   Возращает объект HtmlCollection. По поведению схожий с массивом, но также имеет метод <b>index</b> для доступа к елементам по индексу в коллекции
+                                </li>
+                            </ul>
+
+                            <h4>Свойство DOM объектов</h4>
+                            <ul>
+                                <li>
+                                    <b>childNodes</b>  - содержит в себе массив всех дочерних елементов на один уровень ниже. Включает в себя теги и текстовые узлы.
+                                </li>
+                                <li>
+                                    <b>children</b>  - содержит в себе массив всех дочерних елементов на один уровень ниже. Включает в себя только теги.
+                                </li>
+                                <li>
+                                    <b>firstChild</b>  - Содержит в себе ссылку на первый дочерний елемент уровнем ниже
+                                </li>
+                                <li>
+                                    <b>lastChild</b>  - Содержит в себе ссылку на последний дочерний елемент уровнем ниже
+                                </li>
+                                <li>
+                                    <b>parentNode</b>  - Содержит в себе ссылку на родительский елемент уровнем выше
+                                </li>
+                                <li>
+                                    <b>nodeType</b>  - Содержит в себе ТИП узла. Числовое значение. "1" : "ELEMENT_NODE",  "2" : "ATTRIBUTE_NODE", "3" : 'TEXT_NODE', "4" : "COMMENT_NODE"
+                                </li>
+                                <li>
+                                    <b>tagName</b>  - Свойство доступное только у узлов отвечающих за теги
+                                </li>
+                                <li>
+                                    <b>innerHTML</b>  - Свойство содержащее весь HTML который находится внутри тега в ввиде текста. Свойство доступное только у узлов отвечающих за теги
+                                </li>
+                                <li>
+                                    <b>attributes</b>  - Свойство содержит в себе массив всех аттрибутов узла.
+                                </li>
+                                <li>
+                                    <b>nextSibling</b>  - Содержит в себе ссылку на следующий узел в дереве на том же уровне что и текущий.
+                                </li>
+                                <li>
+                                    <b>previousSibling</b>  - Содержит в себе ссылку на предыдущий узел в дереве на том же уровне что и текущий.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 5--> 
+                
+                <!--Start lesson 6-->
+                <div class="accordion-group" id="lesson_6">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSixth">
+                            <h4>Lesson 6</h4>
+                        </a>
+                    </div>
+                    <div id="collapseSixth" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 6-->
+
+                <!--Start lesson 7-->
+                <div class="accordion-group" id="lesson_7">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven">
+                            <h4>Lesson 7</h4>
+                        </a>
+                    </div>
+                    <div id="collapseSeven" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 7-->
+
+                <!--Start lesson 8-->
+                <div class="accordion-group" id="lesson_8">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight">
+                            <h4>Lesson 8</h4>
+                        </a>
+                    </div>
+                    <div id="collapseEight" class="accordion-body collapse">
+                        <div class="hero-unit">
+                            <h4></h4>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End lesson 8-->
+                
+                
+            </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; Середенко Дмитрий</p>
+    </footer>
+
+</div><!--/.fluid-container-->
+</body>
+</html>
