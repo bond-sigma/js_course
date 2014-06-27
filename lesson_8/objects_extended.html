@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+
+        var firstObject = {
+            field1 : 'value1',
+            field2 : 'value2',
+            field3 : 'value3'
+        };
+
+
+        /*Получение списка свойств объекта */
+        console.log("", Object.keys(firstObject));
+        console.log("", firstObject.hasOwnProperty('field4'));
+
+
+        /*У свойства добавленного через литеральное значение нет проблем с перезаписью значения*/
+        firstObject.field1 = '----';
+
+        /*Добавляем новое свойство и указываем его параметры. Данное свойство имеет */
+        Object.defineProperty(firstObject, 'field4', {
+            /*Говорим что возможно или нет удалить это поле*/
+            configurable    : false,
+            /*Будет ли это поле выводится при перечислении через for var .. in */
+            enumerable      : false,
+            get             : function () {
+                return '-=-=-=-=';
+            },
+            set             : function (value) {
+                console.log('Вы выставляете следующее значение');
+                this.field4 = value + '=-';
+            }
+        });
+
+        console.log('Теперь наш объект такой', firstObject);
+        console.log('Наше поле field4: ', firstObject.field4 + '\n');
+
+        Object.defineProperty(firstObject, 'field5', {
+            /*Устанавливаем исходное значение*/
+            value           : 'value5',
+            /*Можно ли изменять значение этого поля*/
+            writable        : false,
+            configurable    : false,
+            enumerable      : false
+        });
+
+        console.log('Теперь наш объект такой', firstObject);
+        /*Пробуем его изменить*/
+        firstObject.field5 = 10;
+        console.log('Наше поле field5: ', firstObject.field5 + '\n');
+        /* Пробуем его удалить*/
+        delete firstObject.field5;
+        console.log('После попытки удаления: ', firstObject, '\n');
+
+        console.log('Перечисление:');
+        for (var field in firstObject) {
+            console.log('Поле: ', field);
+        }
+
+
+        var secondObject = {
+            field1 : 'value1',
+            field2 : 'value2'
+        };
+
+        /*Делает невозможным добавление новых свойств в объект*/
+        Object.seal(secondObject);
+
+        secondObject.field3 = 10;
+        secondObject.field2 = 35;
+        console.log('Наш объект после попытки добавления нового свойства: ', secondObject, '\n');
+
+        /*Замораживаем объект не давая возможности изменять его и удалять его свойства и добавлять новые.*/
+        Object.freeze(secondObject);
+        delete secondObject.field1;
+        secondObject.field2 = 'Some string';
+
+        console.log("Объект после заморозки и попытки изменения: ", secondObject)
+
+
+
+    </script>
+</body>
+</html>

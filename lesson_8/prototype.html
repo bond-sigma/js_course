@@ -6,29 +6,290 @@
 <body>
     <script type="application/javascript">
 
-        var objectA  = {
-            methodA: function () {
-                console.log('I method from A');
-            }
-        };
+        /*Простой пример работы прототипа*/
 
-        var objectB  = {
-            methodB: function () {
-                console.log('I method from B')
-            }
-        };
-
-        objectB.prototype = objectA.prototype;
-
-
-        function inherit(C, P) {
-            var F = function () {};
-            F.prototype = P.prototype;
-            C.prototype = new F();
-            C.uber = P.prototype;
-            C.prototype.constructor = C;
-
+        /**
+         * Конструктор класса Машина
+         * @constructor
+         */
+        function Car(сolor) {
+            /*Свойство обьявленное в конструкторе будет у каждого екземпляра свое*/
+            this.color = сolor;
         }
+
+        Car.prototype.go = function () {
+            console.log('Car with color ' + this.color + ' is started');
+        };
+        var car1 = new Car('red');
+        var car2 = new Car('green');
+
+        /*Оба екземпляра класса имеют метод go потому что он прописан в прототипе класса ( а если глубже в прототипе самой функции) */
+        car1.go();
+        car2.go();
+
+        console.log('Если такой метод у екземпляра:', car2.hasOwnProperty('go'));
+
+        /*delete Car.prototype.go;
+        car1.go();*/
+
+
+        /*Расширение функционала встроенных объектов через prototype*/
+
+        /*Убеждаемся что наш метод не встроен до нас в объект*/
+        console.log('\n');
+        if (typeof Object.prototype.myMethod !== 'function') {
+            Object.prototype.myMethod = function () {
+                console.log('Наш личный метод!');
+            };
+        }
+
+        /*Этот метод можем вызывать и у нового объекта и уже созданного. В обоих случаях он сработает.*/
+        var cc = {};
+        cc.myMethod();
+        car2.myMethod();
+
+
+        /*Пример добавления нескольких объектов в прототип*/
+
+
+
+        console.log('\n');
+        /*Пример работы конструктора*/
+        function Class() {
+            //some logic here
+        }
+
+        var classInstance = new Class();
+        console.log(classInstance.constructor == Class);
+
+
+        console.log('\n');
+        /*Наследование через копирование свойств*/
+
+        function inheritProp(Parent, Child)
+        {
+            for (var field in Parent) {
+                Child[field] = Parent[field];
+            }
+        }
+        var object  = {a : 1};
+        var object2 = {b: 2};
+
+        inheritProp(object, object2);
+        console.log('Дочерний объект после наследования: ', object2);
+
+
+        console.log('\n');
+        /*Наследование через совместное использование конструктора*/
+        function Animal(name)
+        {
+            this.name = name;
+        }
+
+        Animal.prototype.walk = function () {
+            console.log('Animal started to walk');
+        };
+
+
+        function Dog() {
+            this.type = 'dog';
+            Animal.apply(this, arguments);
+        }
+
+        var dog = new Dog('Bobik');
+
+        console.log('Наша собака: ', dog);
+
+        /*Не сработает потому что наследуются только свойства обявленные через конструктор*/
+        //dog.walk();
+
+
+        console.log('\n');
+        /*Совместное использование прототипов*/
+        function inheritProto(Child, Parent) {
+            Child.prototype = Parent.prototype;
+        }
+
+        /*Обявляем класс движущегося средства*/
+        function Vehicle()
+        {
+            this.type = 'car';
+        }
+
+        Vehicle.prototype.YEAR = '2010';
+        Vehicle.prototype.go = function () {
+             console.log('GO!GO!GO!');
+        };
+
+        /*Класс Мотоцикла*/
+        function Moto() { }
+
+        /*Класс гоночной машины*/
+        function RaceCar() {}
+
+        /*Наследуем их*/
+        inheritProto(Moto, Vehicle);
+        inheritProto(RaceCar, Vehicle);
+
+        var newMoto = new Moto();
+        var newRace = new RaceCar();
+
+        console.log('Свойство из прототипа: ' +  newMoto.YEAR);
+        newMoto.go();
+        newRace.go();
+        console.log('Свойство из конструктора родителя: ', newMoto.type);
+
+        /*Изменяем что то в прототипе. Изменения коснутся всего дерева наследования*/
+        Moto.prototype.go = function () {
+            console.log('STOP!STOP!');
+        };
+
+        newMoto.go();
+        newRace.go();
+
+
+        console.log('\n');
+        /*наследование через заимствование конструктора и прототипы*/
+
+        function People (name, height, weight) {
+
+            this.name   = name;
+            this.height = height;
+            this.weight = weight;
+            this.say = function () {
+                console.log('My name', this.name);
+            }
+        }
+
+        People.prototype.live = function () {
+            console.log(this.type + ' is  Living');
+        };
+
+        function Children(name, height, weight) {
+            People.apply(this, arguments);
+            this.type = 'Child';
+        }
+        Children.prototype = new People();
+
+        function Adult(name, height, weight) {
+            People.apply(this, arguments);
+            this.type = 'Adult';
+        }
+        Adult.prototype = new People();
+
+        var children1   = new Children('Дмитрий', '10', 10);
+        var adult1      = new Adult('Саша', '20', 20);
+        console.log('Наш ребенок:', children1);
+
+        children1.live();
+        children1.say();
+
+        adult1.say();
+
+        delete Children.prototype.live;
+
+        adult1.live();
+
+
+        console.log('\n');
+
+        /*Промежуточный конструктор*/
+        function inheritBest(Child, Parent) {
+            var F = function () {};
+            F.prototype = Parent.prototype;
+            Child.prototype = new F();
+        }
+
+
+        function Employee(name)
+        {
+            this.name = name;
+        }
+
+
+        Employee.prototype.work = function () {
+            console.log(this.type + ' is Working');
+        };
+
+        Employee.prototype.startWork = function () {
+            console.log(this.type + ' Work started');
+        };
+
+
+        function Cleaner()
+        {
+            this.type = 'Cleaner';
+        }
+
+        Cleaner.prototype.clean = function () {};
+
+        function Manager() {
+            this.type = 'Manger';
+        }
+
+
+        Manager.prototype.createContract = function () {
+            console.log('Creating contract');
+        };
+
+
+        /*Наследуем менеджера и уборщика от базового класса работник*/
+        inheritBest(Manager, Employee);
+        inheritBest(Cleaner, Employee);
+
+        var newCleaner = new Cleaner();
+        var newManger  = new Manager();
+
+
+        newCleaner.startWork();
+        newManger.startWork();
+
+        Cleaner.prototype.startWork = function () {
+            console.log('Get a water and started to clean');
+        };
+
+
+        newCleaner.startWork();
+        newManger.startWork();
+
+
+        console.log('Попытаемся получить имя', newCleaner.name);
+
+
+        /*Статические методы*/
+
+         function SimpleClass()
+         {
+
+         }
+
+         SimpleClass.add    = function () {
+             console.log('Added called');
+         };
+
+         SimpleClass.var2   = 10;
+
+         /*Вызывать статические методы можно только напрямую у класса (функции) и нельзя у екземпляра*/
+         SimpleClass.add();
+
+        var simpleInstance = new SimpleClass();
+        simpleInstance.add();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </script>
