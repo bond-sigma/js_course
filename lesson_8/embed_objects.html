@@ -11,7 +11,7 @@
         var myNumber = new Number(10);
         console.log('Число в ввиде объекта', myNumber);
         console.log('Max number', Number.MAX_VALUE);
-        console.log('Min number', Number.MAX_VALUE);
+        console.log('Min number', Number.MIN_VALUE);
 
         var parsedVar = parseInt('dddd', 10);
         console.log('Проверка на NaN ' + Number.isNaN(parsedVar) + '\n');
@@ -32,11 +32,11 @@
         console.log('Текущий часовой пояс:', myDate.getTimezoneOffset());
         console.log('Текущее время: Часов: ' + myDate.getHours() + " Минут: " +  myDate.getMinutes());
 
-        var myDate1 = new Date('1902', '12', '12', '10', '50', '50', '50');
+        var myDate1 = new Date('1902', '13', '12', '10', '50', '50', '50');
         console.log('Искуственно созданное время', myDate1.toLocaleDateString(), '\n');
 
 
-        var simpleObject = {a: 1};
+        var simpleObject = {a: 1, f: function () {}};
         var stringObject = JSON.stringify(simpleObject);
         console.log('Преобразования объекта в JSON:', stringObject);
         console.log('Преобразования строки JSON в объект:', JSON.parse(stringObject));
