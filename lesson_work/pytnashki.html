@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="jquery.js"></script>
+
+<style>
+    .field {
+        width: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        height: 50px;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        font-size: 30px;
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+<div id="main-holder" style="width: 200px;">
+
+</div>
+
+
+
+    <script type="text/javascript">
+
+    var Game = {
+        $mainField : null,
+        $fields    : null,
+        matrix     : [],
+        init: function () {
+            this.$mainField = $('#main-holder');
+
+            this.generateField();
+            this.generateBlocks();
+        },
+
+        generateField: function () {
+            var col = 0,
+                    self = this;
+
+
+            for (var i = 0; i < 16; i ++) {
+                this.$mainField.append('<div class="field" data-x="" data-y=""></div>');
+            }
+
+            this.$fields = $('.field');
+
+            this.$mainField.on('click', '.field', function (event) {
+                 //console.log(event.target)self
+                self.moveBlock(event);
+
+            });
+
+        },
+        shuffleBlocks: function shuffle(o) { //v1.0
+            for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+            return o;
+        },
+        moveBlock: function (event) {
+            console.log($(event.target).data('number'))
+        },
+        generateBlocks: function () {
+            var blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ];
+            blocks = this.shuffleBlocks(blocks);
+            var tempArray = [];
+
+            for (var i = 0; i < blocks.length; i ++) {
+
+                tempArray.push(blocks[i]);
+                if (i == blocks.length - 1) {
+                    tempArray.push(0);
+                }
+
+                if ((i + 1) % 4 == 0 || i == blocks.length - 1) {
+
+                    this.matrix.push(tempArray);
+                    tempArray = [];
+                }
+                $(this.$fields.get(i)).data('number', blocks[i]);
+                $(this.$fields.get(i)).html(blocks[i]);
+            }
+        },
+        searchElement: function () {
+
+        }
+    };
+
+
+    $(document).ready(function () {
+        Game.init();
+    })
+
+
+    </script>
+</body>
+</html>

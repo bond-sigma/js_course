@@ -3,6 +3,21 @@
 <head>
     <title></title>
     <script src="jquery.js" type="text/javascript"></script>
+    <script src=""></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var $fieldSet = $('#form-fieldset');
+
+
+            $('#append_html').on('click', function () {
+                //Добавление нового элемента в конец
+                $fieldSet.append('<input type="text">');
+            });
+        })
+    </script>
+
 </head>
 <body>
 <div id="test-id2">
@@ -105,11 +120,11 @@
 
     console.log('\n');
     //Перебор элементов внутри коллекции. this внутри функции перебора указывает на текущий элемент перебора
-    $.each(allPageP, function (index, elem) {
-         console.log('Тег p с индексом:' + index , elem, this);
+    $.each(allPageP, function iterator (index, elem) {
+         console.log('Тег p с индексом:' + index , $(this));
 
          //Для вызова jQuery методов у элементов во время  перебора их нужно обернуть в jQuery объект
-        $(this).find('some_css_query');
+         $(elem).find('some_css_query');
 
     });
 
@@ -121,24 +136,25 @@
     console.log('Поиск дочерних элементов:', $('#p-holder').children('p'));
 
 
+
     //Навешивание обработчиков
     $('#change_html').on('click', function () {
         //Current HTML. Для получения текущего вызываем этот метод без параметров.
         console.log('Current HTML', $('#some-div2').html());
 
         //Меняем текущий HTML на новый
-        $('#some-div2').html('I-AM-NEW-HTML');
+        $('#some-div2').html('');
     });
 
 
 
-    var $fieldSet = $('#form-fieldset');
+   /* var $fieldSet = $('#form-fieldset');
 
 
     $('#append_html').on('click', function () {
         //Добавление нового элемента в конец
         $fieldSet.append('<input type="text">');
-    });
+    });*/
 
 
     $('#prepend_html').on('click', function () {
@@ -148,6 +164,8 @@
 
 
 </script>
+
+
 
 
 </body>
