@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<fieldset>
+    <form action="#" method="post" id="our-form">
+        Text input <input type="text"> <br>
+        Radio input <input type="checkbox" > <br>
+
+        Select box
+        <select>
+            <option></option>
+            <option value="value1">value1</option>
+            <option value="value2">value2</option>
+        </select> <br>
+
+        <input type="submit" value="Отправить">
+
+    </form>
+</fieldset>
+    <script type="text/javascript">
+
+        var formEl = document.querySelector('#our-form');
+
+        //Подписываемся на  отправку формы
+        formEl.addEventListener('submit', function (event) {
+            event.preventDefault();
+            console.log('Our form submitted');
+            for (var i = 0; i < formEl.elements.length; i++) {
+                console.log('Элемент ' , formEl.elements[i], 'Значение: ', formEl.elements[i].value)
+            }
+            return false;
+        });
+
+
+        //Подписываемся на любое изменение формы
+        formEl.addEventListener('change', function (event) {
+            console.log('Форма изменилась:', event);
+        });
+
+
+        //Подписываемся на изменение текстовых полей
+        formEl.addEventListener('input', function (event) {
+            console.log('Значение текстового поля изменилось:', event);
+        });
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>

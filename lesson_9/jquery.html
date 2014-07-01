@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="test-id2">
+    <h1 class="test-class">hello!</h1>
+</div>
+<div id="content-id">
+    <div class="test-class-2" accesskey="20" custom-attribute="custom-value" id="p-holder">
+        <p class="test-class-2">Text1</p>
+        <p><b>BoldText2 with whitespaces</b> and <a href="#" attrib="dddd">Link</a></p>
+        <a href="instances.html">
+            <p>some_with_deep</p>
+
+        </a>
+
+        First radio
+        <input id="first_radio" type="radio" checked>
+
+        Second radio
+        <input type="radio">
+
+    </div>
+</div>
+
+<div id="some-div2">
+    <p>some_p2</p>
+    <p>some_p3</p>
+</div>
+
+<input type="text" id="input-text">
+
+<fieldset id="form-fieldset">
+    <form action="#" method="post" id="our-form">
+        Text input <input type="text"> <br>
+        Radio input <input type="checkbox" > <br>
+
+        Select box
+        <select>
+            <option></option>
+            <option value="value1">value1</option>
+            <option value="value2">value2</option>
+        </select> <br>
+
+        <input type="submit" value="Отправить">
+
+    </form>
+</fieldset>
+
+<input type="button" value="html()" id="change_html">
+<input type="button" value="append()" id="append_html">
+<input type="button" value="prepend()" id="prepend_html">
+
+
+<script type="text/javascript">
+
+    //получение  элемента по CSS селектору id
+    var elementWithId = $('#test-id');
+    console.log('Наш елемент', elementWithId);
+
+
+    //получение  элемента по CSS селектору класса
+    var classElement  = $('.test-class-2');
+    console.log('Наш елемент', classElement);
+
+    //возвращает элемент P с class="test-class-2"
+    var pClassEls = $('p.test-class-2');
+    console.log('Наши теги P', pClassEls);
+
+
+    //Поиск ссылок у которых аттрибут href равен решетке
+    var attrSearch = $('a[href="#"]');
+    console.log('Ссылки с решеткой', pClassEls);
+
+
+    var radioChecked = $('input[type="radio"]:checked');
+    console.log('Поиск отмеченных радио', radioChecked);
+
+
+    //Поиск по селектору внутри найденного элемента
+    var pInDiv = $('p');
+    console.log('Теги P внутри дива: ', pInDiv);
+
+
+    console.log('\n');
+    //Поиск с передачей контекста в котором искать
+    var $resultWithContext = $('#some-div2');
+    var pInSomeDiv = $('p', $resultWithContext);
+
+    console.log('Найденные элементы с учетом контекста:', pInSomeDiv);
+
+
+    //Поиск внутри элемента
+    var pInSomeDiv2 = $('#some-div2').find('p');
+    console.log('Найденные элементы с помощью find() :', pInSomeDiv);
+
+
+     //Доступ к элементам внутри jQuery коллекции
+    console.log('\n');
+    var allPageP = $('p');
+    console.log('Доступ по индексу:', allPageP[0], allPageP.get(1));
+
+    console.log('\n');
+    //Перебор элементов внутри коллекции. this внутри функции перебора указывает на текущий элемент перебора
+    $.each(allPageP, function (index, elem) {
+         console.log('Тег p с индексом:' + index , elem, this);
+
+         //Для вызова jQuery методов у элементов во время  перебора их нужно обернуть в jQuery объект
+        $(this).find('some_css_query');
+
+    });
+
+
+    //Проверка аттрибутов с помощью метода is
+    console.log('Установлен ли checkbox:', $('#first_radio').is(':checked'));
+
+
+    console.log('Поиск дочерних элементов:', $('#p-holder').children('p'));
+
+
+    //Навешивание обработчиков
+    $('#change_html').on('click', function () {
+        //Current HTML. Для получения текущего вызываем этот метод без параметров.
+        console.log('Current HTML', $('#some-div2').html());
+
+        //Меняем текущий HTML на новый
+        $('#some-div2').html('I-AM-NEW-HTML');
+    });
+
+
+
+    var $fieldSet = $('#form-fieldset');
+
+
+    $('#append_html').on('click', function () {
+        //Добавление нового элемента в конец
+        $fieldSet.append('<input type="text">');
+    });
+
+
+    $('#prepend_html').on('click', function () {
+        //Добавление нового элемента в конец
+        $fieldSet.prepend('<input type="checkbox">');
+    });
+
+
+</script>
+
+
+</body>
+</html>

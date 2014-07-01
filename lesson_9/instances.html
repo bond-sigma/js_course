@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+
+        /*================= toString() ======================*/
+        var simpleObject = {a:1};
+        //Вывод внутреннего свойства [[Class]]с помощью метода toString()
+        console.log(simpleObject.toString());
+
+
+        //Сохраняем ссылку на этот метод для использования его потом с другими элементами
+        var showClass = {}.toString;
+
+
+        var simpleArray = [1, 2, 4];
+        //Вывод внутреннего свойства [[Class]] для обычного массива
+        console.log('Свойство [[Class]] массива: ' + showClass.call(simpleArray));
+
+
+        var simpleDate = new Date();
+        //Вывод внутреннего свойства [[Class]] для объекта даты
+        console.log('Свойство [[Class]] объекта даты: ' + showClass.call(simpleDate));
+
+        //Переопределяем метод toString() для обычного объекта. Этот метод должен возращать примитив
+        var anotherObject = {
+            b : 1,
+            toString: function () {
+                return "ПЕРЕПИСАЛИ";
+            }
+        };
+
+        console.log("Вызов метода для преобразования: " + anotherObject);
+
+        //Метод должен возвращать примитив иначе будет проигнорирован и вызыван базовый метод.
+        var secondObject = {
+            c : 1,
+            toString : function () {
+                return { a: 1};
+            }
+        };
+
+        //console.log('Попытка переписания метода с не примитивным возвращаемым значением: ' + secondObject);
+
+
+        /*=================== valueOf() ===================*/
+        var object1 = {a : 1};
+        console.log('Приводим к числу объект:', +object1);
+
+        var object2 = {
+            a : 1,
+            valueOf : function () {
+                return 10;
+            }
+        };
+        console.log('Приводим к числу объект:', +object2);
+
+        //Если метод возвращает не примитив то он игнорируется
+
+
+        /*============= instanceof=========================*/
+
+
+        function SomeClass() {
+            this.someField = 10;
+        }
+
+        var someClassInstance = new SomeClass();
+
+        console.log('Проверяем если екземпляр нашего класса создан конструктором: ' , someClassInstance instanceof SomeClass);
+
+
+        /*=================Утиная типизация===================*/
+
+
+        var arr = [1, 2, 3];
+
+        //Если у объекта присутсвует такое свойство типа функции  - то мы почти уверены что это массив
+        if (arr.splice) {
+            console.log("Это точно массив");
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id="test-id2">
+    <h1 class="test-class">hello!</h1>
+</div>
+<div id="content-id">
+    <div  class="test-class-2" accesskey="20" data-some-attr="custom-value" id="p-holder">
+        <p class="test-class-2">Text1</p>
+
+        <p><b>BoldText2 with whitespaces</b> and <a href="#" attrib="dddd">Link</a></p>
+        <a data-option="some_option_value" href="instances.html">dddddd</a>
+
+        First radio
+        <input type="radio" checked>
+
+        Second radio
+        <input type="radio">
+
+    </div>
+</div>
+<input type="text" id="input-text">
+<script type="text/javascript">
+
+    var pHoler = document.querySelector('#p-holder');
+    console.log('Все data-* аттрибуты нашего элемента: ', pHoler.dataset);
+    console.log('Чтение одного data-* аттрибута: ', pHoler.dataset.someAttr);
+
+
+    var aWithData = document.querySelector('a[href="instances.html"]');
+    console.log('Чтение аттрибута: ', aWithData.dataset.option);
+
+    //Добавление нового аттрибута
+    aWithData.dataset.newDataAttribute = 10;
+    console.log('Все data-* аттрибуты нашего элемента: ', aWithData.dataset);
+
+
+
+</script>
+
+</body>
+</html>

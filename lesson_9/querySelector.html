@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id='test-id'>
+    <div id="test-id2">
+        <h1 class="test-class">hello!</h1>
+    </div>
+    <div id="content-id">
+        <div class="test-class-2" accesskey="20" custom-attribute="custom-value" id="p-holder">
+            <p class="test-class-2">Text1</p>
+            <p><b>BoldText2 with whitespaces</b> and <a href="#" attrib="dddd">Link</a></p>
+            <a href="instances.html">dddddd</a>
+
+            First radio
+            <input type="radio" checked>
+
+            Second radio
+            <input type="radio">
+
+        </div>
+    </div>
+    <input type="text" id="input-text">
+
+
+    <script type="text/javascript">
+
+        //получение  элемента по CSS селектору id
+        var elementWithId = document.querySelector('#test-id');
+        console.log('Наш елемент', elementWithId);
+
+
+        //получение  элемента по CSS селектору класса
+        var classElement  = document.querySelector('.test-class-2');
+        console.log('Наш елемент', classElement);
+
+        //возвращает элемент P с class="test-class-2"
+        var pClassEls = document.querySelectorAll('p.test-class-2');
+        console.log('Наши теги P', pClassEls);
+
+
+        //Поиск ссылок у которых аттрибут href равен решетке
+        var attrSearch = document.querySelectorAll('a[href="#"]');
+        console.log('Ссылки с решеткой', pClassEls);
+
+
+        var radioChecked = document.querySelector('input[type="radio"]:checked');
+        console.log('Поиск отмеченных радио', radioChecked);
+
+
+        //Поиск по селектору внутри найденного элемента
+        var pInDiv = elementWithId.querySelectorAll('p');
+        console.log('Теги P внутри дива: ', pInDiv);
+
+
+        var elementGetById = document.getElementById('test-id');
+
+
+
+    </script>
+
+</div>
+</body>
+</html>
