@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <input type="button" value="Send message" onclick="sendMessage();">
+    <iframe name="receiveIframe" src="http://localhost:63342/js_course/lesson_10/iframe_recipient.html">
+
+    </iframe>
+
+    <script type="text/javascript">
+
+        function sendMessage() {
+            window.frames.receiveIframe.postMessage("Привет!", "http://localhost:63342/");
+        }
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        console.log(document.cookie);
+
+
+        // возвращает cookie с именем name, если есть, если нет, то undefined
+        function getCookie(name) {
+            var matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        // получение значение куки через сервисную самописную функцию
+        console.log('Получение значения куки:', getCookie('connect.sid'));
+
+
+        //установка новой куки со значениями для домена и времени жизни - сессия
+        document.cookie = 'someName=someValue';
+
+
+        //установка сессии с дополнительными параметрами
+        var date = new Date( new Date().getTime() + 60*1000 );
+        document.cookie="someName1=somevalue; path=/; expires="+date.toUTCString();
+
+
+        //сервисная функция для установки куки
+        function setCookie(name, value, options) {
+            options = options || {};
+
+            var expires = options.expires;
+
+            if (typeof expires == "number" && expires) {
+                var d = new Date();
+                d.setTime(d.getTime() + expires*1000);
+                expires = options.expires = d;
+            }
+            if (expires && expires.toUTCString) {
+                options.expires = expires.toUTCString();
+            }
+
+            value = encodeURIComponent(value);
+
+            var updatedCookie = name + "=" + value;
+
+            for(var propName in options) {
+                updatedCookie += "; " + propName;
+                var propValue = options[propName];
+                if (propValue !== true) {
+                    updatedCookie += "=" + propValue;
+                }
+            }
+
+            document.cookie = updatedCookie;
+        }
+
+        //сервисная функция по удалению куки. она устанавливает пустое значение и время истечении в прошлом
+        function deleteCookie(name) {
+            setCookie(name, "", { expires: -1 })
+        }
+
+
+        //проверка на то работают ли в браузере куки или отключены
+        if (!navigator.cookieEnabled) {
+            console.log('Включите cookie для комфортной работы с этим сайтом');
+        } else {
+            console.log('Cookie  включены');
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

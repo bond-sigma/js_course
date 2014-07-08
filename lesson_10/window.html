@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //открыть окно без дополнительных параметров
+        window.open("http://google.com.ua");
+
+        //открытие окна с дополнительными параметрами
+        var params = 'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000';
+        var newWindowObject = window.open('/', 'test', params);
+
+        //Смотрим что лежит внутри нашего объекта
+        console.log('New window Object', newWindowObject);
+
+
+        //Смотрим ссылку на объект окна который открыл
+        //console.log('Window.opener', newWindowObject.opener);
+
+
+        //закрытие текущего окна
+        function closeCurrent()
+        {
+            window.close();
+        }
+
+
+        //манипуляции с открытым окном
+        function manipulateWindow()
+        {
+            var newWin = window.open('/', 'example', 'width=600,height=400');
+            newWin.focus();
+            newWin.onload = function () {
+                // создать div в документе нового окна
+                var div = newWin.document.createElement('div');
+                div.innerHTML = 'JS course';
+                div.style.fontSize = '30px';
+
+
+                var body = newWin.document.body;
+                // вставить первым элементом в новое body
+                body.insertBefore(div, body.firstChild);
+            };
+        }
+
+
+        //Показать окно
+        function showWindow()
+        {
+            window.open("http://google.com.ua");
+        }
+
+        window.addEventListener('resize', function () {
+            console.log('Window resized', event);
+        }, false);
+
+        window.addEventListener('load', function () {
+            console.log('Window loaded', event);
+        }, false);
+
+
+
+
+        //Показать окно по времени без действия пользователя
+        setTimeout(function () {
+               //showWindowWhichWillBeBlocked();
+        }, 5000);
+
+
+    </script>
+<input type="button" onclick="showWindow()" value="Show window">
+<input type="button" onclick="manipulateWindow()" value="Show custom window">
+<input type="button" value="Close()" onclick="closeCurrent();">
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>Some page with div</div>
+    <iframe src="http://dailyjs.com/"  name="iframeName"></iframe>
+
+    <script type="text/javascript">
+
+        console.log('IFRAMES', window.frames);
+
+        console.log('Access by name', window.frames.iframeName);
+
+        console.log('Object window of iframe', document.getElementsByTagName('IFRAME')[0].contentWindow);
+
+        document.getElementsByTagName('IFRAME')[0].addEventListener('load', function () {
+            console.log('IFRAME loaded')
+        }, false);
+
+    </script>
+
+</body>
+</html>
