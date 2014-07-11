@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    console.log('\n Implement via parent class\n');
+    // родительский конструктор
+    function CarMaker() {
+
+    }
+    // метод предка
+    CarMaker.prototype.drive = function () {
+        return "Vroom, I have " + this.doors + " doors";
+    };
+    // статический фабричный метод
+    CarMaker.factory = function (type) {
+        var constr = type,
+                newcar;
+        // сообщить об ошибке, если конструктор
+        // для запрошенного типа отсутствует
+        if (typeof CarMaker[constr] !== "function") {
+            throw {
+                name   : "Error",
+                message: constr + " doesn’t exist"
+            };
+        }
+        // в этой точке известно, что требуемый конструктор существует
+        // поэтому определим отношения наследования с предком,
+        // но только один раз
+        if (typeof CarMaker[constr].prototype.drive !== "function") {
+            CarMaker[constr].prototype = new CarMaker();
+        }
+
+        // создать новый экземпляр
+        newcar = new CarMaker[constr]();
+        return newcar;
+    };
+
+    // специализированные конструкторы
+    CarMaker.Compact = function () {
+        this.doors = 4;
+    };
+    CarMaker.Convertible = function () {
+        this.doors = 2;
+    };
+    CarMaker.SUV = function () {
+        this.doors = 24;
+    };
+
+    var SUV         = CarMaker.factory('SUV');
+    var Convertible = CarMaker.factory('Convertible');
+
+    console.log(SUV, Convertible);
+
+
+    /*Пример реализации без наследования от фабрики */
+    console.log('\n Implement via holder object\n');
+
+    function inheritBest(Child, Parent) {
+        var c = Child.prototype.constructor;
+        var F = function () {};
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.prototype.constructor = c;
+    }
+
+    var Factory = (function () {
+
+        var factory = {
+            contsructors: {
+                Car   : function () {
+                    this.type = 'simple_car';
+                    //Главный класс
+                },
+                Minivan: function () {
+                    this.type = 'simple_minivan';
+                    //дочерний класс
+                }
+            },
+            getInstance: function (className) {
+                if (this.contsructors[className]) {
+                    return new this.contsructors[className]();
+                } else {
+                    throw Error('Unknown class name ' + className);
+                }
+            }
+        };
+
+        //делаем какое то наследование или какие то операции
+        inheritBest(factory.contsructors.Minvan, factory.contsructors.Car);
+
+        return factory;
+    })();
+
+    var car         = Factory.getInstance('Car');
+    var miniven     = Factory.getInstance('Minivan');
+
+    console.log(car, miniven);
+
+</script>
+</body>
+</html>

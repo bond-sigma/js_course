@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //Метод для декорирования
+        function decorate( obejectTodecorate, decoratorObject, listOfdecorators ) {
+
+            if (!obejectTodecorate.decorators) {
+                obejectTodecorate.decorators = [];
+            }
+
+            if (listOfdecorators == '*') {
+                for (var func in decoratorObject) {
+                    obejectTodecorate[func] = decoratorObject[func];
+                }
+            } else if (listOfdecorators instanceof Array) {
+                for (var i = 0; i < listOfdecorators.length; i++) {
+                    if (!obejectTodecorate[listOfdecorators[i]] && decoratorObject[listOfdecorators[i]]) {
+                        obejectTodecorate[listOfdecorators[i]] = decoratorObject[listOfdecorators[i]];
+                    }
+                }
+            }
+        }
+
+        var country = 'US';
+
+        var decorators = {
+            usTaxReduce : function () {
+                this.taxes *= 2;
+            }
+        };
+
+
+        var Sale = {
+            country: null,
+            taxes  : null,
+            calculateTaxes: function () {
+                this.runDecorators();
+                console.log('Taxes', this.taxes);
+            },
+            runDecorators: function () {
+                if (this.decorators) {
+                    for (var i = 0; i < this.decorators.length; i++) {
+                        this.decorators[i].apply(this);
+                    }
+                }
+            }
+        };
+
+        Sale.taxes = 200;
+
+        if (country == 'US') {
+            decorate(Sale, decorators, ['usTaxReduce']);
+        }
+
+        Sale.calculateTaxes();
+
+
+    </script>
+</body>
+</html>

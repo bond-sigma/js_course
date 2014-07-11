@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        /*Реализаци*/
+        var testModule = (function () {
+
+            var counter = 0;
+
+            function privateMethod() {
+                // some implementation
+            }
+
+            return {
+
+                incrementCounter: function () {
+                    return counter++;
+                },
+
+                resetCounter: function () {
+                    console.log( "counter value: " + counter );
+                    counter = 0;
+                }
+            };
+
+        })();
+
+
+        // Изменяем значение приватной переменной через публичный метод
+        testModule.incrementCounter();
+
+        // Публичный метод который имеет доступ к приватной переменной
+        testModule.resetCounter();
+
+    </script>
+</body>
+</html>

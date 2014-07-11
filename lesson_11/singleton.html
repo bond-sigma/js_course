@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /*Пример реализации синглтона через статическое свойство*/
+        console.log('\n Implement via static field\n');
+        function Universe() {
+            // имеется ли экземпляр, созданный ранее?
+            if (typeof Universe.instance === "object") {
+                return Universe.instance;
+            }
+
+            // создать новый экземпляр
+            this.start_time = Math.random();
+            this.bang       = "Big";
+
+            //Записываем в статическое свойство ссылку на  this.
+            Universe.instance = this;
+
+            // неявный возврат экземпляра:
+            // return this;
+        }
+
+        var uni1 = new Universe();
+        var uni2 = new Universe();
+
+        console.log(uni1, uni2);
+
+
+        console.log('\n Implement via closure\n');
+        /*Пример реализации через замыкание*/
+        function Universe1() {
+            // сохраненный экземпляр
+            var instance = this;
+            // создать новый экземпляр
+            this.start_time = Math.random();
+            this.bang       = "Big";
+            // переопределить конструктор
+            Universe = function () {
+                return instance;
+            };
+        }
+
+
+        var uni3 = new Universe1();
+        var uni4 = new Universe1();
+
+        Universe1.prototype.someMethod = function () {
+            console.log('I test method');
+        };
+
+        uni3.someMethod();
+
+
+        /*Пример реализации через замыкание с сохранением ссылки на прототип*/
+        function Universe3() {
+            // сохраненный экземпляр
+            var instance = null;
+           // переопределить конструктор
+            Universe = function Universe() {
+                return instance;
+            };
+            // перенести свойства прототипа
+            Universe.prototype = this;
+            // создать экземпляр
+            instance = new Universe();
+            // переустановить указатель на конструктор
+            instance.constructor = Universe;
+            // добавить остальную функциональность
+            instance.start_time = 0;
+            instance.bang = "Big";
+            return instance;
+        }
+
+
+        var uni5 = new Universe3();
+        var uni6 = new Universe3();
+
+        Universe1.prototype.someMethod = function () {
+            console.log('I test method');
+        };
+
+        uni5.someMethod();
+
+
+
+
+
+    </script>
+</body>
+</html>
