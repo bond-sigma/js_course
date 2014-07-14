@@ -6,23 +6,42 @@
 <body>
     <script type="text/javascript">
 
+        //Объект посредник для независимого общения между компонентами программы
         var mediator = (function () {
+            //приватный метод который будет доступен только через замыкание
             var subscribe = function (channel, fn) {
-                if (!mediator.channels[channel]) mediator.channels[channel] = [];
+
+                //проверяем если уже подписчики на этот канал информации
+                if (!mediator.channels[channel]) {
+                    mediator.channels[channel] = [];
+                }
+
+                //добавляем обработчик в массив обработчиков для событий этого канала
                 mediator.channels[channel].push({ context: this, callback: fn });
+
                 return this;
             };
-
+            //
             var publish = function (channel) {
-                if (!mediator.channels[channel]) return false;
+
+                //если при публикации события нету подписчиков на канала (обработчиков события) то ничего не делаем
+                if (!mediator.channels[channel]) {
+                    return false;
+                }
+
+                //превращаем массив аргументов в обычный массив убирая из списка имя события
                 var args = Array.prototype.slice.call(arguments, 1);
+
+                //перебираем все функции-подписчики и выполняем их передавая аргументы
                 for (var i = 0, l = mediator.channels[channel].length; i < l; i++) {
                     var subscription = mediator.channels[channel][i];
                     subscription.callback.apply(subscription.context, args);
                 }
+
                 return this;
             };
 
+            //возращаем объект с публичными методами
             return {
                 channels : {},
                 publish  : publish,
@@ -37,24 +56,29 @@
 
 
         mediator.name = "tim";
+        //подписываемся на канал с именем nameChange и ждем сообщений в нем
         mediator.subscribe('nameChange', function(arg) {
             console.log(this.name);
             this.name = arg;
             console.log(this.name);
         });
 
+        //публикуем в канал nameChange чтобы вызывать обработчики
         mediator.publish('nameChange', 'david');
 
 
 
         var obj = {name: 'sam'};
+        //делаем obj объектом который может выступать в роли медиатора
         mediator.installTo(obj);
+        //подписываемся на событие nameChange
         obj.subscribe('nameChange', function(arg) {
             console.log(this.name);
             this.name = arg;
             console.log(this.name);
         });
 
+        //При публикации в канал будут вызван обработчик на 60 и 75 строке
         obj.publish('nameChange', 'john');
 
 

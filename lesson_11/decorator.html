@@ -6,18 +6,27 @@
 <body>
     <script type="text/javascript">
 
-        //Метод для декорирования
+        //Функция для декорирования. Таким образом мы добавляем часть функционала объекту на этапе исполнения кода
+        /**
+         *
+         * @param obejectTodecorate Объект который будем декорировать и куда будем добавлять методы
+         * @param decoratorObject Объект из которого будем брать методы для декроации
+         * @param listOfdecorators Массив имен методов которые будем переносить дял декорирования
+         */
         function decorate( obejectTodecorate, decoratorObject, listOfdecorators ) {
 
+            //проверяем есть ли объекта который будем декорировать это свойство
             if (!obejectTodecorate.decorators) {
                 obejectTodecorate.decorators = [];
             }
 
+            //Если передали не массив а звездочку что означает что нужно перенести все методы
             if (listOfdecorators == '*') {
                 for (var func in decoratorObject) {
                     obejectTodecorate[func] = decoratorObject[func];
                 }
             } else if (listOfdecorators instanceof Array) {
+                //если все таки был передан массив переносим методы которые назвали
                 for (var i = 0; i < listOfdecorators.length; i++) {
                     if (!obejectTodecorate[listOfdecorators[i]] && decoratorObject[listOfdecorators[i]]) {
                         obejectTodecorate[listOfdecorators[i]] = decoratorObject[listOfdecorators[i]];
@@ -28,6 +37,7 @@
 
         var country = 'US';
 
+        //обявляем объект из которого будем переносить в будещем
         var decorators = {
             usTaxReduce : function () {
                 this.taxes *= 2;
@@ -35,6 +45,7 @@
         };
 
 
+        //обявляем объект который будем декорировать
         var Sale = {
             country: null,
             taxes  : null,
@@ -54,6 +65,7 @@
         Sale.taxes = 200;
 
         if (country == 'US') {
+            //декорируем
             decorate(Sale, decorators, ['usTaxReduce']);
         }
 

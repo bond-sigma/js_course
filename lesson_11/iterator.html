@@ -7,14 +7,20 @@
     <script type="text/javascript">
 
         /*Объект который ведет себя как итератор*/
+        /**
+         * Объект который ведет себя как итератор это объект который может быть перебран в цикле
+         */
         var agg = (function () {
+            //индекс текущего елемента для итерирования
             var     index   = 0,
                     data    = [1, 2, 3, 4, 5],
                     length  = data.length;
             return {
+                //получить следующий элемент
                 next   : function () {
                     var element;
 
+                    //проверяем если текущий не последний в списке
                     if (!this.hasNext()) {
                         return null;
                     }
@@ -22,12 +28,15 @@
                     index = index + 2;
                     return element;
                 },
+                //метод для проверки не достигли ли мы конца в переборе
                 hasNext: function () {
                     return index < length;
                 },
+                //сбросить индекс текущего элемента на начало
                 rewind : function () {
                     index = 0;
                 },
+                //вернуть текущий элемент
                 current: function () {
                     return data[index];
                 }

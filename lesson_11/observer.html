@@ -84,6 +84,92 @@
     paper.monthly();
 
 
+    /**
+     * Создаем класс от которого будут наследоватся чтобы реализовывать интерфейс Наблюдатель
+     * @constructor
+     */
+    function EventEmitter() {
+        //каждый екземпляр должен иметь свой список событий поэтому помещаем это свойство в конструктор
+        this.events = [];
+    }
+
+    EventEmitter.prototype = {
+        constructor: EventEmitter,
+        //метод добавления обработчика на событие. Аналогичен подписке на события в jquery
+        /**
+         *
+         * @param eventName Имя события
+         * @param callback функция обработчик на событие
+         * @param context Контекст для this в котором вызывать это событие
+         */
+        on         : function (eventName, callback, context) {
+
+            //если подписчиков для такого события еще не было создаем массив для подписчиков
+            if (typeof this.events[eventName] === "undefined") {
+                this.events[eventName] = [];
+            }
+
+            //добавляем обработчик в массив для для данного события
+            this.events[eventName].push({
+                fn     : callback,
+                context: context || this
+            });
+        },
+        //Удаление обработчиков для определенного события
+        off        : function (eventName) {
+            if (this.events[eventName]) {
+                this.events[eventName] = [];
+            }
+        },
+        //Вызвать событие с таким именем
+        fireEvent  : function (eventName) {
+            // Превращаем все аргументы переданные в функцию в массив и вырезаем имя события
+            var args = Array.prototype.slice.apply(arguments, [1]);
+
+            //Вызываем все обработчики для события с массивом аргументов
+            if (this.events[eventName]) {
+                for (var i = 0; i < this.events[eventName].length; i++) {
+                    this.events[eventName][i].fn.apply(this.events[eventName][i].context, args);
+                }
+            }
+        }
+    };
+
+    /**
+     * Объявляем класс и наследуем через заимствование конструктора от EventEmitter
+     * @constructor
+     */
+    function Car()
+    {
+        this.name = 'Honda';
+        this.start = function () {
+            //Вызываем событие с аргументами 1,2,3,4 которые будут переданы в в обработчики
+            this.fireEvent('car:started',1 , 2, 3, 4);
+        };
+        EventEmitter.apply(this);
+    }
+
+    //Наследуем методы
+    Car.prototype = EventEmitter.prototype;
+
+    function Driver() {
+        this.press = function () {
+            console.log('Pressed');
+        }
+    }
+
+    var car1 = new Car();
+    var driver1 = new Driver();
+
+    //Подписываемся на событие старта двигателя у самой машины
+    car1.on('car:started', function () {
+        console.log(arguments)
+        this.press();
+    }, driver1);
+
+    car1.start();
+
+
 </script>
 </body>
 </html>
