@@ -40,7 +40,7 @@
             this.start_time = Math.random();
             this.bang       = "Big";
             // переопределить конструктор
-            Universe = function () {
+            Universe1 = function () {
                 return instance;
             };
         }
@@ -61,15 +61,15 @@
             // сохраненный экземпляр
             var instance = null;
            // переопределить конструктор
-            Universe = function Universe() {
+            Universe3 = function Universe3() {
                 return instance;
             };
             // перенести свойства прототипа
-            Universe.prototype = this;
+            Universe3.prototype = this;
             // создать экземпляр
-            instance = new Universe();
+            instance = new Universe3();
             // переустановить указатель на конструктор
-            instance.constructor = Universe;
+            instance.constructor = Universe3;
             // добавить остальную функциональность
             instance.start_time = 0;
             instance.bang = "Big";
@@ -80,7 +80,7 @@
         var uni5 = new Universe3();
         var uni6 = new Universe3();
 
-        Universe1.prototype.someMethod = function () {
+        Universe3.prototype.someMethod = function () {
             console.log('I test method');
         };
 
