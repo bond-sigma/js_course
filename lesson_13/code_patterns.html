@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body style="height: 200px;">
+    <script type="text/javascript">
+
+        /*Шаблон условий для сокращени кода*/
+        //сравнение аргумента по значению с каждым условием
+        function testCondition (value) {
+            if (value == 0) {
+                return 'some_string';
+            } else if (value == 1) {
+                return 'some_string2';
+            } else if (value == 2) {
+                return 'some_string3';
+            }
+        }
+
+        //Код с таким условием получается проще и короче и вместо сравнения у нас просто доступ по индексу
+        function testCondition1(value)
+        {
+            var results = ['some_string', "some_string1", "some_string2"];
+            return results[value];
+        }
+
+        var type = 'foo';
+        //Шаблон проверки на допустмые значения для сокращения записи
+        //обычная проверка через условия
+        if (type === 'foo' || type === 'bar') {
+
+        }
+
+        //альтернативный метод. полезен когда не более 5 элементов.
+        //Применяется для проверки если значение входит в список допустимых
+        if (({foo:1, bar:1})[type]) {
+
+        }
+
+
+        /*Шаблон констант в двух вариантах.
+        * 1. На статических свойствах и именованием только большими буквами
+        * 2. Через шаблон модуль и приватные методы
+        * */
+
+        console.log('Константы');
+        console.log('\n');
+
+        //Первый вариант констант это обьявление статических свойств описанных большими буквами
+        function Calculation() {
+            //какой-то класс для подсчета чего
+        }
+
+        Calculation.RATE = '8.2';
+        Calculation.CURRENCY = 'USD';
+
+        //Второй вариант это завести в коде модуль который будет отвечать за это.
+        var Constants = (function () {
+            var constants = {},
+                    ownProp = Object.prototype.hasOwnProperty,
+                    allowed = {
+                        string  : 1,
+                        number  : 1,
+                        boolean : 1
+                    },
+                    prefix = (Math.random() + "_").slice(2);
+            return {
+                set       : function (name, value) {
+                    if (this.isDefined(name)) {
+                        return false;
+                    }
+                    if (!ownProp.call(allowed, typeof value)) {
+                        return false;
+                    }
+                    constants[prefix + name] = value;
+                    return true;
+                },
+                isDefined : function (name) {
+                    return ownProp.call(constants, prefix + name);
+                },
+                get       : function (name) {
+                    if (this.isDefined(name)) {
+                        return constants[prefix + name];
+                    }
+                    return null;
+                }
+            };
+        }());
+
+        console.log(Constants.isDefined("CURRENCY"));
+
+        console.log(Constants.set("CURRENCY", "USD"));
+
+        console.log(Constants.isDefined("CURRENCY"));
+
+        console.log(Constants.set("RATE", 8.2));
+
+        console.log(Constants.get("RATE"));
+
+        console.log(Constants.set("RATE", 11.2));
+
+        console.log(Constants.get("RATE"));
+
+        console.log('\n');
+
+
+
+        /*
+        *Шаблон немедленной инициализации объекта без засорения пространства имен и оставления ссылок в нем
+        * */
+        console.log('Немедленно инициализируемые объекты');
+        ({
+
+            someHtmlElementHolder:null,
+            maxheight:400,
+            getHeight:function () {
+                return this.someHtmlElementHolder.style.height;
+            },
+            init:function () {
+                this.someHtmlElementHolder = document.getElementsByTagName('BODY')[0];
+                console.log(this.getHeight());
+                //какие то другие задачи по инициализации
+            }
+        }).init();
+
+        var currentTimeVarint1 = new Date();
+        currentTimeVarint1 = currentTimeVarint1.getTime();
+
+        console.log('Вариант с немедленным объектом', (new Date()).getTime());
+
+        console.log('\n');
+
+
+
+
+        /*Шаблон при котором функция всегда будет классом, незаисимо от того вызывалась она с new или без него*/
+        function Car() {
+            /**
+             * Если мы вызываем без new то this внутри ссылается на window а не
+             * на экземпляр класса, в таком случае мы делаем проверку и принудительно вызываем new
+             */
+            if (!(this instanceof Car)) {
+                return new Car();
+            }
+
+            this.model = "Tesla model S";
+        }
+
+        /**
+         * Независимо от того как мы вызывали в обоих случаях мы получим экземпляр класса
+         * @type {Car}
+         */
+        var car1 = new Car();
+        var car2 = Car();
+
+        console.log('Шаблон принудительного класса \n');
+        console.log('Первая машина', typeof car1, car1.model);
+        console.log('Вторая машина', typeof car2, car2.model);
+        console.log('\n');
+
+
+
+        /*
+        *Глубокое копирование объектов. Предназначается для того чтобы если у вас есть объект
+        * который представляет какое то состояние и вы хотите его скопировать то это происходило без проблем
+        * и с разрывом ссылок в памяти
+        * */
+        console.log('Шаблон полного коппирования объекта');
+        function cloneDeep(parent, child) {
+            var i;
+            //сохраняем ссылку на базовый метод toString для определения типа объекта
+            var toStr = Object.prototype.toString;
+            //тип который отвечает за массива
+            var astr = "[object Array]";
+
+            child = child || {};
+
+            for (i in parent) {
+                if (parent.hasOwnProperty(i)) {
+                    //если у нас объект или массив копируем его рекурсивно
+                    if (typeof parent[i] === 'object') {
+                        //задаем пустое базовое значение куда будем копировать рекурсивно
+                        child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+                        //вызываем эту же функцию рекурсивно
+                        cloneDeep(parent[i], child[i]);
+                    } else {
+                        //иначе просто копируем простое значение
+                        child[i] = parent[i];
+                    }
+                }
+            }
+            return child;
+        }
+
+        var firstObject = {
+            arr            : [1, 2, 3],
+            subObjectField : {
+                field1 : true
+            },
+            testMethod     : function () {
+                return this.arr;
+            }
+        };
+        var secondObject = cloneDeep(firstObject);
+
+        firstObject.arr.push(4);
+
+        console.log('Массив первого объекта', firstObject.testMethod());
+        console.log('Массив второго объекта', secondObject.testMethod());
+
+        console.log('Проверяем их на равенство', secondObject.arr === firstObject.arr); // false
+        secondObject.subObjectField.field1 = false;
+
+        console.log('Первый объект', firstObject);
+
+
+
+
+
+
+    </script>
+</body>
+</html>

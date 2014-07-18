@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        function Car(name, color, someOtherValue)
+        {
+            this.name = name;
+            this.color = color;
+            this.someField = someOtherValue;
+        }
+
+        for (var i = 0; i < 10000; i++) {
+           window['instance_' + i] = new Car('SomeName' + i, 'Some_color' + i, 'Some_value' + i);
+        }
+
+    </script>
+</body>
+</html>
