@@ -13,7 +13,7 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(['jquery', './modules/main_module', 'waypoints'],
+requirejs(['jquery', './modules/main_module'],
 	function ($, moduleMain) {
 		moduleMain.init();
 

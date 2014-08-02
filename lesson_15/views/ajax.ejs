@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+<script type="text/javascript" src="/jquery.js"></script>
+</head>
+<body>
+
+<form name="our_form">
+    <input type="text" name="some1">
+    <input type="text" name="some2">
+</form>
+
+<div id="results">
+
+
+</div>
+
+
+    <input type="button" value="Async" onclick="runAjax1Async()">
+    <input type="button" value="Sync" onclick="runAjax1Sync()">
+    <input type="button" value="StatusExample" onclick="runAjaxStatus()">
+    <input type="button" value="Headers" onclick="runWithHeaders()">
+    <input type="button" value="Events" onclick="runAllEvents()">
+
+
+
+<script type="text/javascript">
+
+    /**
+     * 0 - Unitialized
+     1 - Loading
+     2 - Loaded
+     3 - Interactive
+     4 - Complete
+     */
+
+    /*Пример простого запроса на AJAX асинхронного*/
+    function runAjax1Async() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', '/url?name1=10&name=20', true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) return;
+
+
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send(null);
+    }
+
+    function runAjax1Sync() {
+        window.xhr = new XMLHttpRequest();
+        xhr.open('GET', '/syncajax', true);
+
+        xhr.onabort = function () {
+            console.log('request aborted');
+        };
+
+        xhr.send(null);
+        //$('#results').append(xhr.responseText);
+    }
+
+    function runAjaxStatus()
+    {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', '/someroute', true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+
+            console.log(xhr.status, xhr.statusText);
+
+            console.log(xhr.getResponseHeader('Content-Type'));
+
+            var data = JSON.parse(xhr.responseText);
+
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send(null);
+    }
+
+    function runWithHeaders() {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:3001/headers', true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send(null);
+
+    }
+
+    function runAllEvents()
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/headers', true);
+
+        xhr.onerror = function () {
+            console.log('Error ocurred');
+        };
+
+        xhr.onload = function () {
+            console.log('Request sent');
+        };
+
+        xhr.onprogress = function () {
+            console.log('Some data received', xhr.responseText);
+        };
+
+        xhr.onabort = function () {
+            console.log('Aborted');
+        };
+
+        xhr.onloadstart = function () {
+            console.log('Request started');
+        };
+
+        xhr.onloadend = function () {
+            console.log('Data receiving from server ended.')
+        };
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send(null);
+    }
+
+    function postRequest()
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/posthandler', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send("name=111&name111=233");
+    }
+
+    function formDataRequest()
+    {
+        var xhr = new XMLHttpRequest();
+
+        var formDat = new FormData(document.forms.our_form);
+
+        xhr.open('POST', 'http://localhost:3001/posthandler', true);
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) {
+                return;
+            }
+
+            $('#results').append(xhr.responseText);
+        };
+
+        xhr.send(formDat);
+    }
+
+
+    //Access-Control-Allow-Origin : *
+    //Access-Control-Allow-Credentials
+
+
+</script>
+</body>
+</html>
