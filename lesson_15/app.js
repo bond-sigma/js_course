@@ -59,53 +59,37 @@ app.get('/syncajax', function (req, res) {
 	var limit = (new Date()).getTime() + 10000;
 	while ((new Date()).getTime() < limit ) {
 
-
-
 	}
-
 	res.send('Sync response');
-
 });
 
 
 app.get('/add_good', function (req, response) {
 	var name = req.query.name;
-
 	//search blal
-
 	cart.push(name);
-
-
 });
 
 app.get('/remove_good', function (req, resp) {
 	var name = req.query.name;
-
 	//blalbal if good in cart
-
-
 });
 
 app.get('/testhtml', function (req, res) {
-
 	var dataToTemplate = {
 		name: 'Dmitry',
 		job: 'JS coder',
 		goods : ["sss", "ssss"]
 	};
-
 	res.render('index', dataToTemplate, function(err, html){
 		res.send(html);
 	});
-
 });
 
 app.get('/ajax', function (req, res) {
-
 	res.render('ajax', function(err, html){
 		res.send(html);
 	});
-
 });
 
 app.get('/testajax', function (req, res) {
@@ -114,8 +98,6 @@ app.get('/testajax', function (req, res) {
 });
 
 app.post('/posthandler', function (req, res) {
-
-
 	console.log(req.body);
 	res.send(req.body);
 });
