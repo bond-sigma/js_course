@@ -15,4 +15,14 @@
 4. Список бесплатных книг по JS http://jsbooks.revolunet.com/
 5. Блог одного из гуру по JS http://www.nczonline.net/
 6. http://www.smashingmagazine.com/tag/javascript/ Бывают отлиные статьи
-7. Тоже неплохой блог http://dailyjs.com/ 
+7. Тоже неплохой блог http://dailyjs.com/
+
+
+#Backbone
+
+https://github.com/addyosmani/backbone-fundamentals/blob/master/index.md - Отличный туториал
+
+Полезные Плагины:
+
+1. Marionette
+2. Layout.Manager
