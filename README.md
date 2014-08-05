@@ -21,6 +21,7 @@
 #Backbone
 
 https://github.com/addyosmani/backbone-fundamentals/blob/master/index.md - Отличный туториал
+http://underscorejs.org/
 
 Полезные Плагины:
 
