@@ -20,12 +20,16 @@
         Car.prototype.go = function () {
             console.log('Car with color ' + this.color + ' is started');
         };
+
+
         var car1 = new Car('red');
         var car2 = new Car('green');
 
         /*Оба екземпляра класса имеют метод go потому что он прописан в прототипе класса ( а если глубже в прототипе самой функции) */
         car1.go();
         car2.go();
+
+
 
         console.log(car2)
 
@@ -119,6 +123,7 @@
         }
 
         Vehicle.prototype.YEAR = '2010';
+
         Vehicle.prototype.go = function () {
              console.log('GO!GO!GO!');
         };
@@ -130,7 +135,9 @@
         function RaceCar() {}
 
         /*Наследуем их*/
-        inheritProto(Moto, Vehicle);
+        //inheritProto(Moto, Vehicle);
+        Moto.prototype = Vehicle.prototype;
+
         inheritProto(RaceCar, Vehicle);
 
         var newMoto = new Moto();
@@ -151,6 +158,8 @@
 
 
         console.log('\n');
+
+
         /*наследование через заимствование конструктора и прототипы*/
 
         function People (name, height, weight) {
@@ -173,16 +182,20 @@
             People.apply(this, arguments);
             this.type = 'Child';
         }
+
         Children.prototype = new People();
 
         function Adult(name, height, weight) {
             People.apply(this, arguments);
             this.type = 'Adult';
         }
+
         Adult.prototype = new People();
 
         var children1   = new Children('Дмитрий', '10', 10);
         var adult1      = new Adult('Саша', '20', 20);
+
+
         console.log('Наш ребенок:', children1);
 
         children1.live();

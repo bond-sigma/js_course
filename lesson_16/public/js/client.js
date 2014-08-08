@@ -11,6 +11,9 @@ requirejs.config({
 		backbone : {
 			deps    : ['jquery', 'underscore']
 		},
+		layoutmanager: {
+			deps: ['backbone']
+		},
 		bootstrap: {
 			deps : ['jquery']
 		}

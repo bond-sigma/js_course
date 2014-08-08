@@ -1,24 +1,5 @@
+<a href="/#add">Add new ToDo</a>
 <ul>
-    <% console.log(todos.length); if (todos.length > 0) { %>
 
-        <% console.log(333) %>
-
-        <% for(var i = 0; i < todos.length; i++) { %>
-            <li data-id="<%= todos[i].id %>"><%= todos[i].text %></li>
-        <% } %>
-
-    <% } else { %>
-        <li>To-do list is empty</li>
-    <% } %>
 </ul>
 
-<form>
-    <fieldset>
-        <legend>Add new TO-DO item form</legend>
-        <input type="text" placeholder="Describe what to-do">
-        <label class="checkbox">
-            <input type="checkbox"> Done
-        </label>
-        <button type="submit" class="btn">Save</button>
-    </fieldset>
-</form>

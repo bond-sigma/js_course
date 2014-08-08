@@ -21,9 +21,11 @@
         </table>
         <a href="/"></a>
         <span></span>
-        <div accesskey="some-key" class="some-test-class"></div>
+        <div accesskey="some-key" class="some-test-class">
+            <div>fdgdfg</div>
+        </div>
         
-        <a> Link5</a>
+        <a  id="www"> Link5</a>
         
         <div></div>
         
@@ -44,6 +46,25 @@
     <input type="button" value="I Button">
 
 <script type="text/javascript">
+
+    function deleteTags () {
+
+        var tagName = document.getElementsByTagName('input')[0].value;
+        var tags    = document.getElementsByTagName( tagName );
+
+        for (var i = tags.length - 1; i >= 0; i--) {
+
+            console.log('Length' + tags.length);
+
+            tags[i].parentNode.removeChild (tags[i]);
+        }
+    }
+    document.getElementsByTagName('input')[1].addEventListener('click', function ( ){
+
+        deleteTags();
+
+    }, false);
+
     /**
      * 1. Написать функцию которая получает как параметр HTML элеемент и выводит на екран основные свойства и все атрибуты себя и всех дочерних елементов. 
      * Вывод на экран осуществляется вставкой в <body> тега <div>  и информации в нем.

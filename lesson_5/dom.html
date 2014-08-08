@@ -25,6 +25,9 @@
     
     /*Получение елемента по атриббуту id*/
     var idsElement = document.getElementById('content-id');
+
+    idsElement.getElementsByTagName('A');
+
     console.log(idsElement);
     
     /*document.getElementsByClassName() — позволяет получить элементы по их классу*/
@@ -68,8 +71,8 @@
     
     
     for (var i =0; i < idsElement.childNodes.length; i++) {
-        
-        console.log(i + ". Дочерний элемент:" , idsElement.childNodes[i]);
+
+        console.log(i + ". Дочерний элемент:", idsElement.childNodes[i]);
         console.log("Имя узла:" + idsElement.childNodes[i].nodeName);
         console.log("Имя тега:" + idsElement.childNodes[i].tagName);
         console.log("Тип узла: " + dictionaryTypes[idsElement.childNodes[i].nodeType]);
@@ -88,7 +91,8 @@
     
     /*Получение список дочерних елементов исключая текстовые узлы*/
     console.log("Дочерние елементы без текстовых узлов: ", idsElement.children);
-    
+
+    idsElement.siblings
     
     /*Получение следующего узла дерева по уровню*/
     console.log("Следующий елемент по уровню: ", idsElement.nextSibling.nextSibling);    

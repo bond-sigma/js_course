@@ -27,7 +27,7 @@
         
         console.log(element.attributes);
 
-        if ( element.hasAttributes() ) {
+        if (element.tagName &&  element.hasAttributes() ) {
             for ( var i = 0; i < element.attributes.length; i++ ) {
                 if ( typeof element.attributes[i] != 'function' ) {
                     console.log( 'Имя: ' + element.attributes[i].nodeName + " Значение: ", element.getAttribute( element.attributes[i].nodeName ) );

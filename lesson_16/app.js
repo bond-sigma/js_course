@@ -13,13 +13,15 @@ app.use(bodyParser.urlencoded());
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var todo = {
-	'6152435614231' : {
-		text        : 'test text',
-		createdDate : (new Date()).getUTCDate(),
-		done        : false,
-		id          : (new Date()).getTime()
-	}
+var first = (new Date()).getTime();
+
+var todo = {};
+
+todo[first] = {
+	text        : 'test text',
+	createdDate : (new Date()).getUTCDate(),
+	done        : false,
+	id          : first
 };
 
 
@@ -43,6 +45,45 @@ app.post('/todo', function (req, res) {
 	}
 
 	res.send(newTodo);
+});
+
+app.put('/todo', function (req, resp) {
+
+	if (req.body.id) {
+
+		if (todo[req.body.id]) {
+
+			todo[req.body.id] = {
+				text        : req.body.text,
+				done        : req.body.done
+			};
+
+			resp.send(todo[req.body.id]);
+
+		} else {
+			resp.status(404).send('Not found');
+		}
+
+	} else {
+		resp.status(500).send('Wrong params');
+	}
+});
+
+app.delete('/todo/:id', function (req, res) {
+
+	if (req.params.id) {
+
+		if (todo[req.params.id]) {
+
+			delete todo[req.params.id]
+
+		} else {
+			res.status(404).send('Not found');
+		}
+
+	} else {
+		res.status(500).send('Wrong params');
+	}
 });
 
 app.get('/todos', function (req, res){

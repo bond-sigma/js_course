@@ -33,10 +33,25 @@
         console.log('Текущее время: Часов: ' + myDate.getHours() + " Минут: " +  myDate.getMinutes());
 
         var myDate1 = new Date('1902', '13', '12', '10', '50', '50', '50');
-        console.log('Искуственно созданное время', myDate1.toLocaleDateString(), '\n');
+        console.log('Искуственно созданное время', myDate1, '\n');
 
 
-        var simpleObject = {a: 1, f: function () {}};
+
+        var diff = myDate.getTime() - myDate1.getTime();
+        console.log(diff/1000)
+
+        if (diff > 60) {
+            var minutes = diff /60;
+            if (minutes < 60) {
+                console.log('some mins ago', minutes)
+            }
+        }
+
+
+        var simpleObject = {
+            a: 1,
+            f: function () {}
+        };
         var stringObject = JSON.stringify(simpleObject);
         console.log('Преобразования объекта в JSON:', stringObject);
         console.log('Преобразования строки JSON в объект:', JSON.parse(stringObject));

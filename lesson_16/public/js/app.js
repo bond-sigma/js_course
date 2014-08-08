@@ -8,7 +8,6 @@ define(['backbone', './routes/index', './modules/mediator'],
 			var Routes = new Router();
 			Backbone.history.start();
 
-
 			console.log('Main init');
 		}
 	};

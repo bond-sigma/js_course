@@ -19,6 +19,8 @@
             console.log( this.name );
         }
 
+        testFuntion();
+
         /**
          * Создали самый простой объект
          */
@@ -75,6 +77,7 @@
          */
         newInstance.showName.apply(testObject);
         newInstance.showName.call(testObject);
+        newInstance.showName();
 
         /**
          * Функция с двумя параметрами
@@ -82,7 +85,24 @@
         function someFunctionWithArguments(firstParam, secondParam)
         {
             console.log('Мое имя:' , this.name);
-            console.log('Я функция с параметрами', firstParam, secondParam)
+            console.log('Я функция с параметрами', firstParam, secondParam);
+
+
+
+        }
+
+        var Car  = {
+            go : function (speed) {
+
+            }
+
+        }
+
+        var CarANother = {
+            go : function () {
+                //Car.go.apply(CarANother, arguments);
+
+            }
         }
 
         /**

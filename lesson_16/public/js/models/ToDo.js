@@ -1,6 +1,6 @@
 define(['backbone'], function (Backbone) {
 	return Backbone.Model.extend({
-		url      : '/todo',
+		urlRoot    : '/todo',
 		idAttribute: 'id',
 		defaults : {
 			done       : false,
