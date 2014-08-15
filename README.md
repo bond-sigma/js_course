@@ -27,3 +27,11 @@ http://underscorejs.org/
 
 1. Marionette
 2. Layout.Manager
+
+
+#Angular
+
+1. Сайт - https://angularjs.org/
+2. Туториал - https://docs.angularjs.org/tutorial
+3. Хорошие туториал дял быстрого погружения
+    * http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app
