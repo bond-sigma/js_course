@@ -13,16 +13,22 @@ define([
 		events      : {
 			'submit form' : 'submitAction'
 		},
-		initialize  : function () {
-
-
+		initialize  : function (options) {
+			console.log(options.model);
+			if (!options.model) {
+				this.model = new ToDoModel();
+			}
 		},
 		submitAction : function (event) {
 			event.preventDefault();
 
-			var model = new ToDoModel();
+			var self = this;
 
-			model.save(
+			//var model = new ToDoModel();
+
+			var isNew = this.model.isNew();
+
+			this.model.save(
 				{
 					done       : this.$('[name="todo-done"]').is(':checked'),
 					text       : this.$('[name="todo-text"]').val(),
@@ -31,7 +37,12 @@ define([
 				{
 					success : function () {
 						//console.log('saved');
-						Mediator.publish('todo:added', model);
+						if (isNew) {
+							Mediator.publish('todo:added', self.model);
+						} else {
+							Backbone.history.navigate('', {trigger: true});
+						}
+
 					}
 				});
 
@@ -46,7 +57,10 @@ define([
 			return false;
 		},
 		render      : function () {
-			this.$el.html(this.template());
+
+			console.log(this.model.toJSON());
+
+			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		}
 	});

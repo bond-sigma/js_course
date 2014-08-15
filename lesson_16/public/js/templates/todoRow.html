@@ -1,5 +1,6 @@
-<li data-id="<%= id %>" <% if(done) { %> style="text-decoration:line-through;" <% } %>  >
-    <input type="checkbox" <% if(done) { %> checked <% } %>> <%= text %> <input type="button" value="Delete">
+<li data-id="<%= _id %>" <% if(done) { %> style="text-decoration:line-through;" <% } %>  >
+    <input type="checkbox" <% if(done) { %> checked <% } %>> <%= text %> <input type="button" value="Delete" class="delete">
+    <input type="button" value="Update" class="update">
 </li>
 
 

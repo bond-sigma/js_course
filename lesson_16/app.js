@@ -5,6 +5,18 @@ var path = require('path');
 var multer = require('multer');
 
 
+var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID
+var format = require('util').format;
+
+var MongoCollection = null;
+
+MongoClient.connect('mongodb://192.168.56.101:27017/js_course', function(err, db) {
+	if(err) throw err;
+	MongoCollection = db.collection('todo');
+});
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -12,17 +24,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
-
-var first = (new Date()).getTime();
-
-var todo = {};
-
-todo[first] = {
-	text        : 'test text',
-	createdDate : (new Date()).getUTCDate(),
-	done        : false,
-	id          : first
-};
 
 
 app.get('/', function (request, response) {
@@ -34,35 +35,54 @@ app.get('/', function (request, response) {
 app.post('/todo', function (req, res) {
 
 	if (req.body.text) {
+
 		var newTodo = {
 			text        : req.body.text,
-			createdDate : req.body.createdDate,
-			done        : req.body.done,
-			id          : (new Date()).getTime()
+			createdDate : (new Date()),
+			done        : req.body.done
 		};
 
-		todo[newTodo.id] = newTodo;
+		MongoCollection.insert(newTodo, function ( err, results) {
+			if (err) {
+				throw  err;
+			}
+
+			newTodo._id = results[0]._id;
+			res.send(newTodo);
+
+		});
 	}
 
-	res.send(newTodo);
 });
 
-app.put('/todo', function (req, resp) {
+app.put('/todo/:id', function (req, resp) {
 
-	if (req.body.id) {
+	if (req.params.id) {
 
-		if (todo[req.body.id]) {
+		MongoCollection.findOne({_id: new ObjectID(req.params.id)}, function (err, result) {
+			if (err) throw err;
 
-			todo[req.body.id] = {
-				text        : req.body.text,
-				done        : req.body.done
-			};
+			if (result) {
 
-			resp.send(todo[req.body.id]);
+				MongoCollection.update({_id: new ObjectID(req.params.id)}, { $set : {
+					text        : req.body.text,
+					done        : req.body.done
+				}}, {}, function (err) {
+					if (!err) {
+						resp.send({
+							text        : req.body.text,
+							done        : req.body.done
+						});
+					} else {
+						resp.status(500).send('Server error');
+					}
+				});
 
-		} else {
-			resp.status(404).send('Not found');
-		}
+			} else {
+				resp.status(404).send('Not found');
+			}
+
+		});
 
 	} else {
 		resp.status(500).send('Wrong params');
@@ -73,14 +93,16 @@ app.delete('/todo/:id', function (req, res) {
 
 	if (req.params.id) {
 
-		if (todo[req.params.id]) {
+		console.log(req.params.id);
 
-			delete todo[req.params.id]
+		MongoCollection.remove({_id: new ObjectID(req.params.id)}, function (err, results) {
+			if(err) {
+				throw err;
+			}
 
-		} else {
-			res.status(404).send('Not found');
-		}
+			res.status(200).send('OK');
 
+		});
 	} else {
 		res.status(500).send('Wrong params');
 	}
@@ -88,13 +110,16 @@ app.delete('/todo/:id', function (req, res) {
 
 app.get('/todos', function (req, res){
 
-	var todos = [];
+	MongoCollection.find().toArray(function ( err, results) {
 
-	for (var i in todo) {
-		todos.push(todo[i]);
-	}
+		if (err) {
+			res.status(500).send('Server error');
+			throw err;
+		}
 
-	res.send(todos);
+		res.send(results);
+	});
+
 });
 
 

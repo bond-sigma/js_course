@@ -11,7 +11,8 @@ define([
 			template    : _.template(template),
 			events      : {
 				'change input[type="checkbox"]' : 'mark',
-				'click input[type="button"]' : 'deleteTodo'
+				'click input.delete' : 'deleteTodo',
+				'click input.update' : 'updateTodo'
 			},
 			initialize  : function () {
 
@@ -26,6 +27,10 @@ define([
 				Mediator.publish('delete:model', this.model.id);
 				//this.model.fetch();
 				this.model.destroy();
+			},
+			updateTodo: function () {
+				Mediator.publish('edit:model', this.model);
+				Backbone.history.navigate('add', {trigger: true});
 			},
 			render      : function () {
 				this.$el.html(this.template(this.model.toJSON()));

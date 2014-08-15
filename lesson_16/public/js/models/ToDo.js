@@ -1,12 +1,12 @@
 define(['backbone'], function (Backbone) {
 	return Backbone.Model.extend({
 		urlRoot    : '/todo',
-		idAttribute: 'id',
+		idAttribute: '_id',
 		defaults : {
 			done       : false,
 			text       : '',
 			createDate : null,
-			id: null
+			_id: null
 		}
 	});
 });

@@ -3,9 +3,9 @@
 <form>
     <fieldset>
         <legend>Add new TO-DO item form</legend>
-        <input type="text" name="todo-text" placeholder="Describe what to-do">
+        <input value="<%= text %>" type="text" name="todo-text" placeholder="Describe what to-do">
         <label class="checkbox">
-            <input name="todo-done" type="checkbox"> Done
+            <input <% if(done) { %> checked <% } %>  name="todo-done" type="checkbox"> Done
         </label>
         <button type="submit" class="btn">Save</button>
     </fieldset>
