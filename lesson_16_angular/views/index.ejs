@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <title>Angular ToDo</title>
+    <script type="text/javascript"  src="/js/vendor/angular.js"></script>
+    <script type="text/javascript"  src="/js/controllers.js"></script>
+</head>
+<body >
+
+    <div ng-controller="ListController">
+        <input type="button" value="Load todos" ng-click="loadTodo()">
+        <ul>
+           <li ng-repeat="todo in todos">
+               {{ todo.text }}
+           </li>
+        </ul>
+    </div>
+
+    <div ng-controller="FormController">
+
+    </div>
+
+
+</body>
+</html>
