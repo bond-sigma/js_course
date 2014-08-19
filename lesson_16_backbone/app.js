@@ -32,6 +32,21 @@ app.get('/', function (request, response) {
 	});
 });
 
+app.get('/todo/:id', function (req, res) {
+
+	if (req.params.id) {
+
+		console.log(req.params.id);
+
+		MongoCollection.findOne({_id: new ObjectID(req.params.id)}, function (err, result) {
+			if (err) throw err;
+			res.status(200).send(result);
+		});
+	} else {
+		res.status(500).send('Wrong params');
+	}
+});
+
 app.post('/todo', function (req, res) {
 
 	if (req.body.text) {

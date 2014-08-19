@@ -1,0 +1,9 @@
+    <input type="button" value="Load todos" ng-click="loadTodo()">
+    <ul>
+        <li ng-repeat="todo in todos" data-id="{{ todo._id }}" ng-class="{doneTodo : todo.done}">
+            <input type="checkbox"   ng-init="todo.checked=true" > {{ todo.text }}
+
+            <input type="button" value="Delete" class="delete" ng-click="removeTodo(todo._id)">
+            <input type="button" value="Update" class="update" ng-click="editTodo(todo._id)">
+        </li>
+    </ul>

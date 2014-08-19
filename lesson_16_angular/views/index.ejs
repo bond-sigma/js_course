@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="todoApp">
+<html >
 <head>
     <title>Angular ToDo</title>
     <script type="text/javascript"  src="/js/vendor/angular.js"></script>
+    <script type="text/javascript"  src="/js/vendor/angular-route.js"></script>
+    <script type="text/javascript"  src="/js/vendor/angular-resource.js"></script>
+    <script type="text/javascript"  src="/js/app.js"></script>
     <script type="text/javascript"  src="/js/controllers.js"></script>
+    <script type="text/javascript"  src="/js/services.js"></script>
 </head>
-<body >
-
-    <div ng-controller="ListController">
-        <input type="button" value="Load todos" ng-click="loadTodo()">
-        <ul>
-           <li ng-repeat="todo in todos">
-               {{ todo.text }}
-           </li>
-        </ul>
-    </div>
-
-    <div ng-controller="FormController">
-
-    </div>
-
-
+<style>
+    .doneTodo {
+        text-decoration: line-through;
+    }
+</style>
+<body ng-app="todoApp">
+    <a href="#/form">Add new ToDo</a>
+    <a href="#/">List </a>
+    <div ng-view=""></div>
 </body>
 </html>

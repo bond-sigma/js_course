@@ -1,0 +1,12 @@
+ <form>
+        <fieldset>
+            <legend>Add new TO-DO item form</legend>
+            <input value="" type="text" name="todo-text" placeholder="Describe what to-do" ng-model="todo.text">
+            <label class="checkbox">
+                <input ng-model="todo.done"  name="todo-done" type="checkbox"> Done
+            </label>
+            <button ng-click="saveTodo()" type="button" class="btn">Save</button>
+        </fieldset>
+ </form>
+
+ <pre>form = {{todo | json}}</pre>

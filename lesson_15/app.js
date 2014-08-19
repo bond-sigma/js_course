@@ -81,9 +81,7 @@ app.get('/testhtml', function (req, res) {
 		job: 'JS coder',
 		goods : ["sss", "ssss"]
 	};
-	res.render('index', dataToTemplate, function(err, html){
-		res.send(html);
-	});
+	res.send(dataToTemplate);
 });
 
 app.get('/ajax', function (req, res) {
